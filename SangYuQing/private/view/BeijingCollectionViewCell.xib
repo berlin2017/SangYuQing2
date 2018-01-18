@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <capability name="Baseline standard spacing" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="beijing_cell" id="gTV-IL-0wX" customClass="BeijingCollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="253" height="218"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="253" height="218"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TOa-DB-eeB">
+                        <rect key="frame" x="10" y="20" width="233" height="60"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="60" id="z1y-0i-N8l"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s4l-rQ-gKj">
+                        <rect key="frame" x="105.5" y="88.5" width="42" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sgZ-Of-b7H">
+                        <rect key="frame" x="86.5" y="178" width="80" height="30"/>
+                        <color key="backgroundColor" red="0.64421399109999999" green="0.40255026939999999" blue="0.2158353868" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="80" id="Ugz-Vd-Aub"/>
+                        </constraints>
+                        <state key="normal" title="使用">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                    </button>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="s4l-rQ-gKj" firstAttribute="firstBaseline" secondItem="TOa-DB-eeB" secondAttribute="baseline" constant="24.5" symbolType="layoutAnchor" id="3UT-sN-Kwc"/>
+                <constraint firstAttribute="bottom" secondItem="sgZ-Of-b7H" secondAttribute="bottom" constant="10" id="LpW-9T-COs"/>
+                <constraint firstItem="s4l-rQ-gKj" firstAttribute="centerX" secondItem="SEy-5g-ep8" secondAttribute="centerX" id="Y7K-he-LvG"/>
+                <constraint firstAttribute="trailing" secondItem="TOa-DB-eeB" secondAttribute="trailing" constant="10" id="Yqc-8j-uVZ"/>
+                <constraint firstItem="TOa-DB-eeB" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="20" id="gSc-VU-R4r"/>
+                <constraint firstItem="sgZ-Of-b7H" firstAttribute="centerX" secondItem="SEy-5g-ep8" secondAttribute="centerX" id="hPA-Tk-iie"/>
+                <constraint firstItem="TOa-DB-eeB" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="wBl-cQ-Q6Y"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
+            <size key="customSize" width="253" height="218"/>
+            <connections>
+                <outlet property="imageview" destination="TOa-DB-eeB" id="36d-Qx-qzw"/>
+                <outlet property="jifenLabel" destination="s4l-rQ-gKj" id="xRO-jv-zcH"/>
+                <outlet property="userBtn" destination="sgZ-Of-b7H" id="Iux-o7-rcN"/>
+            </connections>
+            <point key="canvasLocation" x="133.5" y="-46"/>
+        </collectionViewCell>
+    </objects>
+</document>

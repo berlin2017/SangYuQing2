@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>navigation.normal.background.color</key>
+	<string>0xFFFFFF</string>
+	<key>navigation.highlighted.background.color</key>
+	<string>0x0F71BF</string>
+	<key>navigation.highlighted.text.color</key>
+	<string>0xFFFFFF</string>
+	<key>global.main.color</key>
+	<string>0x3286C8</string>
+	<key>page.control.normal.color</key>
+	<string>0xFFFFFF</string>
+	<key>page.control.highlighted.font</key>
+	<integer>20</integer>
+	<key>page.control.normal.font</key>
+	<integer>14</integer>
+</dict>
+</plist>

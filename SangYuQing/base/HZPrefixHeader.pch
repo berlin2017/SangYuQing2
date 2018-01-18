@@ -1,0 +1,47 @@
+//
+//  HZPrefixHeader.pch
+//  AnhuiNews
+//
+//  Created by History on 14-10-14.
+//  Copyright (c) 2014年 ahxmt. All rights reserved.
+//
+
+#ifndef AnhuiNews_HZPrefixHeader_pch
+#define AnhuiNews_HZPrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+
+#import "HZPreference.h"
+#import "HZThemeManager.h"
+
+#import "AFNetworking.h"
+#import "Mantle.h"
+#import "Masonry.h"
+#import "UIView+Toast.h"
+//#import "EGOCache.h"
+//#import "MobClick.h"
+#import "MJRefresh.h"
+#import "UIKit+AFNetworking.h"
+#import "UIImageView+WebCache.h"
+
+#import "HZMacro.h"
+
+#import "HZGlobalConstVarables.h"
+#import "HZRoutePathConstVarables.h"
+#import "HZURLConstVarables.h"
+
+#import "HZCategoryKit.h"
+
+#import "HZHttpClient.h"
+
+//#import "HZHttpTaskKit.h"
+#import "HZLoadingHUD.h"
+
+//#import "HZRoute.h"
+
+#import "HZMacroKit.h"
+#import "DateTools.h"
+
+#endif
