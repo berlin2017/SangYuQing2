@@ -14,10 +14,11 @@ const NSInteger kHZImageViewTag           = 1000;
 @interface ZANImageShowViewController () <UIScrollViewDelegate>
 {
     UIView *_contentView;
-    UIScrollView *_scrollView;
+    __weak IBOutlet UIScrollView *_scrollView;
     NSInteger _numberOfImages;
     
-    UILabel *_pageLabel;
+//    __weak IBOutlet UITextView *_imageTextLabel;
+    __weak IBOutlet UILabel *_pageLabel;
     BOOL _hideNavigationbar;
 }
 @property (nonatomic, strong) NSMutableArray *imageURLArray;
@@ -31,22 +32,9 @@ const NSInteger kHZImageViewTag           = 1000;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    _scrollView = [[UIScrollView alloc]init];
-    [self.view addSubview:_scrollView];
-    [_scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(self.view);
-    }];
-    
-    _pageLabel = [[UILabel alloc]init];
-    [self.view addSubview:_pageLabel];
-    [_pageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.view).mas_offset(10);
-        make.bottom.mas_equalTo(self.view).mas_offset(-20);
-    }];
     _scrollView.pagingEnabled = YES;
     _scrollView.showsHorizontalScrollIndicator = NO;
     _scrollView.showsVerticalScrollIndicator = NO;
-    _scrollView.delegate =self;
     
     self.view.backgroundColor = [UIColor blackColor];
     
@@ -59,10 +47,17 @@ const NSInteger kHZImageViewTag           = 1000;
     
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+//    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+
+
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
-    _scrollView.contentOffset = CGPointMake([UIScreen mainScreen].bounds.size.width * _currentIndex, 0);
+    _scrollView.contentOffset = CGPointMake(_scrollView.width * _currentIndex, 0);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -154,10 +149,6 @@ const NSInteger kHZImageViewTag           = 1000;
         imageView.tag = kHZImageViewTag;
         imageView.contentMode = UIViewContentModeScaleAspectFit;
         [view addSubview:imageView];
-//        [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.left.mas_equalTo(_scrollView);
-//            make.right.mas_equalTo(_scrollView);
-//        }];
         
         if (_imageDataArray) {
             imageView.image = _imageDataArray[index];
@@ -192,6 +183,7 @@ const NSInteger kHZImageViewTag           = 1000;
         make.right.mas_equalTo(lastView.mas_right);
         make.height.mas_equalTo(_scrollView.mas_height);
     }];
+    
     [self updateImageTextLableAtIndex:_currentIndex];
 }
 
@@ -230,7 +222,6 @@ const NSInteger kHZImageViewTag           = 1000;
         }
     }
 }
-
 
 - (void)resetScaleOfIndex:(NSInteger)index
 {
@@ -285,11 +276,41 @@ const NSInteger kHZImageViewTag           = 1000;
     _pageLabel.attributedText = attributedString;
     
     _pageLabel.attributedText = attributedString;
-    NSString *imageText = nil;
-    if (_imageTextArray.count > index) {
-        imageText = _imageTextArray[index];
+//    NSString *imageText = nil;
+//    if (_imageTextArray.count > index) {
+//        imageText = _imageTextArray[index];
+//    }
+//    if (imageText.length) {
+//        _imageTextLabel.text = [imageText replaceHTMLEntities];
+//    }
+//    else {
+//        _imageTextLabel.text = @"";
+//    }
+//
+}
+
+- (IBAction)downloadImageAction:(id)sender
+{
+    [[SDWebImageManager sharedManager] setCacheKeyFilter:^(NSURL *url) {
+        return [url.absoluteString md5];
+    }];
+    UIImage *image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:[[SDWebImageManager sharedManager] cacheKeyForURL:_imageURLArray[_currentIndex]]];
+    if (image) {
+        UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
     }
-    
+    else {
+        [self.view makeCenterOffsetToast:@"保存失败"];
+    }
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+    if (error != NULL) {
+        [self.view makeCenterOffsetToast:@"保存失败"];
+    }
+    else {
+        [self.view makeCenterOffsetToast:@"保存到相册成功"];
+    }
 }
 
 @end

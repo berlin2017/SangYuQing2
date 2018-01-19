@@ -8,6 +8,7 @@
 
 #import "BeijingMubeiViewController.h"
 #import "BeiJingViewController.h"
+#import "MuBeiViewController.h"
 
 @interface BeijingMubeiViewController ()<MyPageViewControllerDataSource>
 @property(nonatomic,strong) UIView *navigationView;       // 导航栏
@@ -47,7 +48,7 @@
         controller.sz_id = _sz_id;
         return controller;
     }else{
-        BeiJingViewController *controller = [[BeiJingViewController alloc]init];
+        MuBeiViewController *controller = [[MuBeiViewController alloc]init];
         controller.sz_id = _sz_id;
         return controller;
     }

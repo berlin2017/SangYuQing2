@@ -56,7 +56,7 @@
             <size key="customSize" width="350" height="412"/>
             <connections>
                 <outlet property="select_imageview" destination="1FO-VP-i5c" id="Ncm-8o-YJt"/>
-                <outlet property="xiangce_imageview" destination="M4L-Ub-Iv8" id="A3Q-Qr-fOe"/>
+                <outlet property="xiangce_imageview" destination="M4L-Ub-Iv8" id="dkC-37-KGv"/>
                 <outlet property="xiangce_name" destination="kkG-2P-oV8" id="24x-to-7Vj"/>
             </connections>
             <point key="canvasLocation" x="179" y="55"/>

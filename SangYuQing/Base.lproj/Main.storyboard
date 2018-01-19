@@ -307,59 +307,25 @@
                                     <outlet property="delegate" destination="tE1-XW-Tbr" id="ZXX-AE-PON"/>
                                 </connections>
                             </scrollView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xsW-Py-TJB">
-                                <rect key="frame" x="0.0" y="547" width="375" height="120"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1/2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jfO-ph-gGC">
-                                        <rect key="frame" x="10" y="5" width="23" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m4c-Ey-5yw">
-                                        <rect key="frame" x="43" y="5" width="312" height="89"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QvR-Wa-c0f">
-                                        <rect key="frame" x="339" y="94" width="16" height="16"/>
-                                        <state key="normal" backgroundImage="news_image_download">
-                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="downloadImageAction:" destination="tE1-XW-Tbr" eventType="touchUpInside" id="Vzg-g6-KUF"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstItem="QvR-Wa-c0f" firstAttribute="top" secondItem="m4c-Ey-5yw" secondAttribute="bottom" id="ARK-jE-yzd"/>
-                                    <constraint firstItem="m4c-Ey-5yw" firstAttribute="top" secondItem="jfO-ph-gGC" secondAttribute="top" id="ENT-0G-rAV"/>
-                                    <constraint firstItem="QvR-Wa-c0f" firstAttribute="trailing" secondItem="m4c-Ey-5yw" secondAttribute="trailing" id="IiR-06-GxW"/>
-                                    <constraint firstAttribute="trailing" secondItem="m4c-Ey-5yw" secondAttribute="trailing" constant="20" id="OLA-QS-7cY"/>
-                                    <constraint firstItem="m4c-Ey-5yw" firstAttribute="top" secondItem="xsW-Py-TJB" secondAttribute="top" constant="5" id="UV3-uo-en4"/>
-                                    <constraint firstItem="m4c-Ey-5yw" firstAttribute="leading" secondItem="jfO-ph-gGC" secondAttribute="trailing" constant="10" id="cWK-NU-k0F"/>
-                                    <constraint firstItem="jfO-ph-gGC" firstAttribute="leading" secondItem="xsW-Py-TJB" secondAttribute="leading" constant="10" id="egj-Zp-NqK"/>
-                                    <constraint firstAttribute="height" constant="120" id="oAQ-ol-s22"/>
-                                    <constraint firstAttribute="bottom" secondItem="QvR-Wa-c0f" secondAttribute="bottom" constant="10" id="tn5-f3-gHf"/>
-                                </constraints>
-                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1/2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jfO-ph-gGC">
+                                <rect key="frame" x="10" y="626" width="23" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="zfF-gK-wpr" firstAttribute="top" secondItem="Gtp-Ph-l9H" secondAttribute="top" id="29A-Df-TQF"/>
-                            <constraint firstItem="Lgs-Yu-Xv1" firstAttribute="top" secondItem="xsW-Py-TJB" secondAttribute="bottom" id="Cj2-7q-2iL"/>
                             <constraint firstItem="zfF-gK-wpr" firstAttribute="leading" secondItem="Gtp-Ph-l9H" secondAttribute="leading" id="Dgg-Bf-s31"/>
                             <constraint firstAttribute="trailing" secondItem="zfF-gK-wpr" secondAttribute="trailing" id="NNi-3b-9Lg"/>
                             <constraint firstAttribute="bottom" secondItem="zfF-gK-wpr" secondAttribute="bottom" id="Oxb-cg-QoF"/>
-                            <constraint firstAttribute="trailing" secondItem="xsW-Py-TJB" secondAttribute="trailing" id="QJa-fc-orm"/>
-                            <constraint firstItem="xsW-Py-TJB" firstAttribute="leading" secondItem="Gtp-Ph-l9H" secondAttribute="leading" id="bpT-Gc-UUd"/>
+                            <constraint firstItem="jfO-ph-gGC" firstAttribute="leading" secondItem="duP-RF-f9J" secondAttribute="leading" constant="10" id="QgH-lT-hfh"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="jfO-ph-gGC" secondAttribute="trailing" constant="20" symbolic="YES" id="pVy-1B-H8G"/>
+                            <constraint firstItem="Lgs-Yu-Xv1" firstAttribute="top" secondItem="jfO-ph-gGC" secondAttribute="bottom" constant="20" id="pzn-RC-AXa"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="duP-RF-f9J"/>
                     </view>
                     <connections>
-                        <outlet property="_imageTextLabel" destination="m4c-Ey-5yw" id="cbB-Ep-6Ol"/>
                         <outlet property="_pageLabel" destination="jfO-ph-gGC" id="qh9-wJ-phh"/>
                         <outlet property="_scrollView" destination="zfF-gK-wpr" id="jTO-s9-Yk7"/>
                     </connections>
@@ -475,6 +441,5 @@
         <image name="ic_siren_light" width="25" height="25"/>
         <image name="ic_user" width="25" height="25"/>
         <image name="ic_user_light" width="25" height="25"/>
-        <image name="news_image_download" width="16" height="16"/>
     </resources>
 </document>

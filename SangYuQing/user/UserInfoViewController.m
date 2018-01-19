@@ -390,7 +390,7 @@
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/html",@"text/javascript",@"text/json", nil];
     NSMutableDictionary * dict = [NSMutableDictionary dictionaryWithCapacity:1];
-    [dict setObject:@"uploaddir" forKey:@"user"];
+    [dict setObject:@"user" forKey:@"uploaddir"];
     [dict setObject:@"_csrf" forKey:@"_csrf"];
     [manager POST:@"http://jk.hwsyq.com/v1/ucenter/storeimg" parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         //通过post请求上传用户头像图片,name和fileName传的参数需要跟后台协商,看后台要传的参数名

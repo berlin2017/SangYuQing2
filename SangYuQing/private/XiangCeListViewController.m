@@ -15,6 +15,8 @@
 #import "UserLoginViewController.h"
 #import "TJZPCollectionViewCell.h"
 #import "MMSheetView.h"
+#import "HUPhotoBrowser.h"
+#import "UIImageView+HUWebImage.h"
 
 @interface XiangCeListViewController ()<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource,HZImageShowViewControllerDelegate,HZImageShowViewControllerDataSource,XiangCeCollectionViewCellDelegate,UIImagePickerControllerDelegate>
 @property(nonatomic,strong) UIView *navigationView;       // 导航栏
@@ -24,6 +26,7 @@
 @property(nonatomic,strong)NSString* choseImageUrl;
 @property(nonatomic,strong)UIButton *cancel;
 @property(nonatomic,strong)UIButton *del;
+@property (nonatomic, strong) NSMutableArray *URLStrings;
 @end
 
 @implementation XiangCeListViewController
@@ -47,7 +50,7 @@
     [_collectionview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.view);
         make.right.mas_equalTo(self.view);
-        make.top.mas_equalTo(self.navigationView.mas_bottom).mas_offset(10);
+        make.top.mas_equalTo(self.navigationView.mas_bottom);
         make.bottom.mas_equalTo(self.view);
     }];
     _collectionview.delegate = self;
@@ -137,10 +140,18 @@
         [sheet show];
         return;
     }
-    ZANImageShowViewController *controller = [[ZANImageShowViewController alloc]init];
-    controller.currentIndex = indexPath.row;
-    controller.dataSource = self;
-    [self.navigationController pushViewController:controller animated:YES];
+    _URLStrings = [NSMutableArray new];
+    for (PhotoItem*item in _list) {
+        [_URLStrings addObject:item.image];
+    }
+    XiangCeCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"xiangce_cell" forIndexPath:indexPath];
+    [HUPhotoBrowser showFromImageView:cell.xiangce_imageview withURLStrings:_URLStrings atIndex:indexPath.row];
+    
+//    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    ZANImageShowViewController *controller = [sb instantiateViewControllerWithIdentifier:@"kVcIdfImageShow"];
+//    controller.dataSource = self;
+//    controller.currentIndex = indexPath.row;
+//    [self.navigationController pushViewController:controller animated:YES];
 }
 
 #pragma mark -
@@ -182,18 +193,19 @@
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/html",@"text/javascript",@"text/json", nil];
     NSMutableDictionary * dict = [NSMutableDictionary dictionaryWithCapacity:1];
-    [dict setObject:@"uploaddir" forKey:@"shizhe"];
+    [dict setObject:@"xiangce" forKey:@"uploaddir"];
     [dict setObject:@"_csrf" forKey:@"_csrf"];
-    [manager POST:@"http://jk.hwsyq.com/v1/ucenter/storeimg" parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    [dict setObject:[NSString stringWithFormat:@"%zd",_xcid] forKey:@"xid"];
+    [dict setObject:@"icon.jpg" forKey:@"name"];
+    [manager POST:@"http://jk.hwsyq.com/v1/xiangce/handle-image-post" parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         //通过post请求上传用户头像图片,name和fileName传的参数需要跟后台协商,看后台要传的参数名
         [formData appendPartWithFileData:imageData name:@"UploadForm[image]" fileName:@"icon.jpg" mimeType:@"image/jpeg"];
         
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         //解析后台返回的结果,如果不做一下处理,打印结果可能是一些二进制流数据
         if (![responseObject[@"state_code"] isEqualToString:@"8888"]) {
-            [self.view makeCenterOffsetToast:@"上传成功,请等待审核"];
+            [self.view makeCenterOffsetToast:@"上传成功,请审核"];
             _choseImageUrl = responseObject[@"image_name"];
-            [self requestList];
         }else{
             [self.view makeCenterOffsetToast:@"登录信息已过期，请重新登录"];
             [self.navigationController popViewControllerAnimated:YES];
@@ -201,9 +213,9 @@
             UserLoginViewController * viewController = [sb instantiateViewControllerWithIdentifier:@"user_login"];
             [viewController setHidesBottomBarWhenPushed:YES];
             [self.navigationController pushViewController:viewController animated:YES];
+             [HZLoadingHUD hideHUDInView:self.view];
         }
         
-        [HZLoadingHUD hideHUDInView:self.view];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self.view makeCenterOffsetToast:@"上传失败,请重试"];
         [HZLoadingHUD hideHUDInView:self.view];
@@ -321,6 +333,7 @@
         HZHttpClient *client = [HZHttpClient httpClient];
         [client hcPOST:@"/v1/xiangce/delpic" parameters:@{@"id":s}  success:^(NSURLSessionDataTask *task, id object) {
             if ([object[@"state_code"] isEqualToString:@"0000"]) {
+                [self cancelEdit];
                 [self requestList];
             }else if([object[@"state_code"] isEqualToString:@"8888"]){
                 [self.view makeCenterOffsetToast:@"登录信息已过期，请重新登录"];

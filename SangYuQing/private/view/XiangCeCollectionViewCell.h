@@ -20,5 +20,6 @@
 -(void)configWithModel:(PhotoItem*)model;
 -(void)configWithXiangCeModel:(PhotoModel*)model;
 -(void)configWithModel:(PhotoItem*)model atIndex:(NSInteger)index;
+@property (weak, nonatomic) IBOutlet UIImageView *xiangce_imageview;
 @property(nonatomic,weak)id<XiangCeCollectionViewCellDelegate>delegate;
 @end

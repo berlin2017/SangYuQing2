@@ -26,6 +26,7 @@
 @property(nonatomic,strong) UIPickerView *pickview;
 @property(nonatomic,copy)NSString * choseImageUrl;
 @property(nonatomic,assign)BOOL isChecked;
+@property(nonatomic,strong) MuDIModel *detail;
 @end
 
 @implementation PrivateCreateViewController
@@ -63,11 +64,15 @@
     [self requestAdd];
     _isChecked = YES;
     if (_model) {
+        _detail = _model;
         if (![NSString isEmptyString:_model.pass]) {
             _isChecked = NO;
             [_array insertObject:@"设置密码:" atIndex:6];
             [_tableview reloadData];
         }
+    }
+    if (!_detail) {
+        _detail = [[MuDIModel alloc]init];
     }
 }
 
@@ -94,6 +99,9 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(indexPath.row==4){
+        return 140;
+    }
     return UITableViewAutomaticDimension;
 }
 
@@ -118,13 +126,13 @@
         CreatPhotoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"creat_photo_cell"];
         cell.delegate = self;
         cell.backgroundColor = [UIColor clearColor];
-        if (_model) {
-            if (_model.sz_avatar_url) {
-                [cell.imageview sd_setImageWithURL:[NSURL URLWithString:_model.sz_avatar_url]];
+        if (_detail) {
+            if (_detail.sz_avatar_url) {
+                [cell.imageview sd_setImageWithURL:[NSURL URLWithString:_detail.sz_avatar_url] placeholderImage:[UIImage imageNamed:@"ic_add"]];
             }else{
-                [cell.imageview sd_setImageWithURL:[NSURL URLWithString:_model.sz_avatar]];
+                [cell.imageview sd_setImageWithURL:[NSURL URLWithString:_detail.sz_avatar] placeholderImage:[UIImage imageNamed:@"ic_add"]];
             }
-             _choseImageUrl = _model.sz_avatar;
+             _choseImageUrl = _detail.sz_avatar;
         }
         return cell;
     }
@@ -154,21 +162,23 @@
         [datePicker addTarget:self action:@selector(valueChange:) forControlEvents:UIControlEventValueChanged];
     }
     if (indexPath.row==0) {
-        cell.edittext.text = _model.sz_name;
+        if (_detail&&_detail.sz_name) {
+             cell.edittext.text = _detail.sz_name;
+        }
     }
     
     if (indexPath.row==1) {
-        cell.edittext.text = _model.birthdate;
+        cell.edittext.text = _detail.birthdate;
     }
     if (indexPath.row==2) {
-        cell.edittext.text = _model.deathdate;
+        cell.edittext.text = _detail.deathdate;
     }
     if (indexPath.row==3) {
-        cell.edittext.text = _model.relation;
+        cell.edittext.text = _detail.relation;
     }
     
     if (indexPath.row==6) {
-        cell.edittext.text = _model.pass;
+        cell.edittext.text = _detail.pass;
     }
     
     if (indexPath.row==3) {
@@ -197,13 +207,26 @@
     NSIndexPath *path = [NSIndexPath indexPathForRow:datePicker.tag inSection:0];
     CreatEditTableViewCell *cell = [_tableview cellForRowAtIndexPath:path];
     cell.edittext.text = dateStr;
+    if(datePicker.tag==1){
+         _detail.birthdate = dateStr;
+    }else{
+        _detail.deathdate = dateStr;
+    }
+   
+}
+
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    if(textField.tag==0){
+        _detail.sz_name = textField.text;
+    }
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
-    _datePicker.tag = textField.tag;
-    //确保加载时也能获取datePicker的文字
-    [self valueChange:_datePicker];
-    
+    if(textField.tag!=0){
+        _datePicker.tag = textField.tag;
+        //确保加载时也能获取datePicker的文字
+        [self valueChange:_datePicker];
+    }
 }
 #pragma mark - UITextFieldDelegate
 
@@ -279,6 +302,7 @@
     NSIndexPath *path = [NSIndexPath indexPathForRow:3 inSection:0];
     CreatEditTableViewCell *cell = [_tableview cellForRowAtIndexPath:path];
     cell.edittext.text = _guanxiData[row];
+    _detail.relation = _guanxiData[row];
 }
 
 -(void)choseImage{
@@ -306,7 +330,7 @@
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/html",@"text/javascript",@"text/json", nil];
     NSMutableDictionary * dict = [NSMutableDictionary dictionaryWithCapacity:1];
-    [dict setObject:@"uploaddir" forKey:@"shizhe"];
+    [dict setObject:@"shizhe" forKey:@"uploaddir"];
     [dict setObject:@"_csrf" forKey:@"_csrf"];
     [manager POST:@"http://jk.hwsyq.com/v1/ucenter/storeimg" parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         //通过post请求上传用户头像图片,name和fileName传的参数需要跟后台协商,看后台要传的参数名
@@ -317,6 +341,8 @@
         if (![responseObject[@"state_code"] isEqualToString:@"8888"]) {
             //            [self.view makeCenterOffsetToast:@"上传成功"];
             _choseImageUrl = responseObject[@"image_name"];
+            _detail.sz_avatar = responseObject[@"image_name"];
+            _detail.sz_avatar_url = responseObject[@"image_src"];
             CreatPhotoTableViewCell *cell = [_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]];
             cell.imageview.image = image;
         }else{
@@ -412,6 +438,8 @@
     [client hcPOST:url parameters:param  success:^(NSURLSessionDataTask *task, id object) {
         if ([object[@"state_code"] isEqualToString:@"0000"]) {
             [self.view makeCenterOffsetToast:@"成功"];
+            [self performSelector:@selector(delayMethod) withObject:nil/*可传任意类型参数*/ afterDelay:2.0];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"creat.notification" object:nil];
         }else{
             [self.view makeCenterOffsetToast:object[@"msg"]];
         }
@@ -421,6 +449,10 @@
         [HZLoadingHUD hideHUDInView:self.view];
     }];
     
+}
+
+-(void)delayMethod{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)hideKey{

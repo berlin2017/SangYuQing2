@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>桑榆晴</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -32,15 +34,15 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>alipay</string>
+			<string></string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>2017101109241081</string>
+				<string>SangYuQing</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>20180119</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -50,6 +52,8 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>使用你的相机信息</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>保存照片</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>使用你的相册信息</string>
 	<key>UILaunchStoryboardName</key>
@@ -63,8 +67,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>

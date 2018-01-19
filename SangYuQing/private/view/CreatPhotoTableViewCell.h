@@ -19,6 +19,7 @@
 @interface CreatPhotoTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *imageview;
 @property (weak, nonatomic) IBOutlet UILabel *tishi_label;
+@property (weak, nonatomic) IBOutlet UILabel *title_label;
 
 @property(weak,nonatomic)id<CreatPhotoTableViewCellDelegate>delegate;
 @end

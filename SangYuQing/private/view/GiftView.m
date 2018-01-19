@@ -59,18 +59,18 @@
 {
     [super layoutSubviews];
     
-    CGFloat iconImageViewX = 15;
-    CGFloat iconImageViewY = 15;
-    CGFloat iconImageViewW = self.frame.size.width-30;
-    CGFloat iconImageViewH = self.frame.size.height-30;
+    CGFloat iconImageViewX = 10;
+    CGFloat iconImageViewY = 10;
+    CGFloat iconImageViewW = self.frame.size.width-20;
+    CGFloat iconImageViewH = self.frame.size.height-20;
     self.iconImageView.frame = CGRectMake(iconImageViewX, iconImageViewY, iconImageViewW, iconImageViewH);
 //    self.iconImageView.layer.borderWidth = 1;
 //    self.iconImageView.layer.borderColor = [UIColor lightGrayColor].CGColor;
 //    self.iconImageView.layer.masksToBounds = YES;
 
-    self.deleteImageView.frame = CGRectMake(0, 0, 30, 30);
+    self.deleteImageView.frame = CGRectMake(0, 0, 20, 20);
     self.deleteImageView.image = [UIImage imageNamed:@"ic_wrong"];
-    self.addImageView.frame = CGRectMake(self.frame.size.width-30, self.frame.size.height-30, 30, 30);
+    self.addImageView.frame = CGRectMake(self.frame.size.width-20, self.frame.size.height-20, 20, 20);
     self.addImageView.image = [UIImage imageNamed:@"ic_right"];
 }
 

@@ -12,6 +12,7 @@
 #import "VideoModel.h"
 #import "DetailVideoCollectionViewCell.h"
 #import "VideoPlayViewController.h"
+#import "UpLoadVideoViewController.h"
 
 @interface VideoGuanLiViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 
@@ -30,7 +31,7 @@
     UIColor *bgColor = [UIColor colorWithPatternImage: [UIImage imageNamed:@"main_bg"]];
     [self.view setBackgroundColor:bgColor];
     [self.view addSubview:self.navigationView];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestList) name:@"uploadvideo.notification" object:nil];
     UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
     layout.itemSize = CGSizeMake(([UIScreen mainScreen].bounds.size.width-10)/2, ([UIScreen mainScreen].bounds.size.width-10)/8*3+25);
     layout.minimumLineSpacing = 10;
@@ -41,7 +42,7 @@
     [_collectionview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.view);
         make.right.mas_equalTo(self.view);
-        make.top.mas_equalTo(self.navigationView.mas_bottom).mas_offset(20);
+        make.top.mas_equalTo(self.navigationView.mas_bottom);
         make.bottom.mas_equalTo(self.view);
     }];
     _collectionview.delegate = self;
@@ -130,8 +131,26 @@
         back_imageview.userInteractionEnabled = YES;
         UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(back)];
         [back_imageview addGestureRecognizer:gesture];
+        UILabel *right_title = [[UILabel alloc]init];
+        [_navigationView addSubview:right_title];
+        [right_title mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(_navigationView).mas_offset(-10);
+            make.bottom.mas_equalTo(_navigationView).mas_offset(-17);
+            make.height.mas_equalTo(30);
+        }];
+        right_title.font = [UIFont systemFontOfSize:14];
+        right_title.text = @"上传视频";
+        right_title.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(toupload)];
+        [right_title addGestureRecognizer:tap];
     }
     return _navigationView;
+}
+
+-(void)toupload{
+    UpLoadVideoViewController *controller = [[UpLoadVideoViewController alloc]init];
+    controller.sz_id = _sz_id;
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 -(void)back{

@@ -56,8 +56,7 @@
     _scorllview.delegate = self;
     _scorllview.userInteractionEnabled = YES;
     [self.view addSubview:_scorllview];
-    
-    
+    _scorllview.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(updateList)];
     _contentView = [[UIView alloc]init];
     _contentView.userInteractionEnabled = YES;
     UIColor *bgColor = [UIColor colorWithPatternImage: [UIImage imageNamed:@"main_bg"]];
@@ -238,9 +237,11 @@
     [self.view addSubview:self.navigationView];
 }
 
+
 -(void)updateList{
     [self requestPage];
     [self requestList];
+    [_scorllview.header endRefreshing];
 }
 
 -(void)requestPage{
@@ -288,6 +289,10 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+//    if (scrollView.contentOffset.y <= -50) {
+//        [self updateList];
+//        return;
+//    }
     CGFloat minAlphaOffset = 0;//- 64;
     CGFloat maxAlphaOffset = 200;
     CGFloat offset = scrollView.contentOffset.y;

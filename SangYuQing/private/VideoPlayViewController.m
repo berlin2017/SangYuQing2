@@ -25,7 +25,7 @@
 
 - (HZVideoPlayerView *)playerView{
     if (!_playerView) {
-        _playerView= [[HZVideoPlayerView alloc] initWithVideoURL:[NSURL URLWithString:@"http://www.hwsyq.com/data/video/2018/01/1514874517787.mp4"]];
+        _playerView= [[HZVideoPlayerView alloc] initWithVideoURL:[NSURL URLWithString:_video_url]];
         CGFloat height = CGRectGetHeight([UIApplication sharedApplication].statusBarFrame)+64;
         _playerView.frame = CGRectMake(0, height, [HZSystemInfoManager share].screenSize.width, [HZSystemInfoManager share].screenSize.width * 0.75);
         _playerView.delegate = self;

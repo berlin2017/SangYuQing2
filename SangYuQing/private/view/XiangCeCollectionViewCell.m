@@ -11,7 +11,7 @@
 #import "PhotoModel.h"
 
 @interface XiangCeCollectionViewCell()
-@property (weak, nonatomic) IBOutlet UIImageView *xiangce_imageview;
+
 @property (weak, nonatomic) IBOutlet UILabel *xiangce_name;
 @property (weak, nonatomic) IBOutlet UIImageView *select_imageview;
 

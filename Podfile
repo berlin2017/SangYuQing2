@@ -22,5 +22,6 @@ pod 'DateTools'
 pod 'WebViewJavascriptBridge'
 pod 'iCarousel'
 pod 'WechatOpenSDK'
+pod 'HUPhotoBrowser'
 
 end

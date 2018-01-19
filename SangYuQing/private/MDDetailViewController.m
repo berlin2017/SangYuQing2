@@ -159,6 +159,7 @@
     [_name mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view);
         make.centerY.mas_equalTo(self.view).mas_equalTo(-10);
+        make.height.mas_equalTo(65);
     }];
     _name.font = [UIFont systemFontOfSize:13];
     _name.textColor = [UIColor whiteColor];
@@ -168,8 +169,8 @@
     [_photo mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(_name.mas_top).mas_offset(-5);
         make.centerX.mas_equalTo(_contentView);
-        make.height.mas_equalTo(40);
-        make.width.mas_equalTo(30);
+        make.height.mas_equalTo(28);
+        make.width.mas_equalTo(21);
     }];
     _photo.backgroundColor = [UIColor clearColor];
     //    photo.contentMode = UIViewContentModeScaleAspectFill;
@@ -419,8 +420,8 @@
     [_contentView addSubview:_giftView];
     [_giftView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.mas_equalTo(_contentView);
-        make.width.mas_equalTo(80);
-        make.height.mas_equalTo(80);
+        make.width.mas_equalTo(60);
+        make.height.mas_equalTo(60);
     }];
     
     [_giftView setImage:model.image];
@@ -574,7 +575,7 @@
                 float screenWith = [UIScreen mainScreen].bounds.size.width;
                 float width = [model.posx integerValue]*screenWith/1200;
                 float height = [model.posy integerValue]*(_contentView.frame.size.height)/746;
-                GiftView *git = [[GiftView alloc]initWithFrame:CGRectMake(width,height, 80, 80)];
+                GiftView *git = [[GiftView alloc]initWithFrame:CGRectMake(width,height, 60, 60)];
                 JPModel *info = model.jipinInfo;
                 [git setImage:info.image];
                 [git finishEdit];

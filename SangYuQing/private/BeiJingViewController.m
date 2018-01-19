@@ -10,7 +10,7 @@
 #import "BeiJingModel.h"
 #import "BeijingCollectionViewCell.h"
 
-@interface BeiJingViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
+@interface BeiJingViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,BeijingCollectionViewCellDelegate>
 
 @property(nonatomic,strong)UICollectionView *collectionview;
 @property(nonatomic,strong)NSArray *list;
@@ -49,7 +49,7 @@
 
 -(void)requestList{
     HZHttpClient *client = [HZHttpClient httpClient];
-    [client hcGET:@"/v1/background/list" parameters:@{@"type":@"1",@"selectType":@"1",@"sz_id":_sz_id} success:^(NSURLSessionDataTask *task, id object) {
+    [client hcGET:@"/v1/background/list" parameters:@{@"type":@"1",@"selectType":@"0",@"sz_id":_sz_id} success:^(NSURLSessionDataTask *task, id object) {
         if ([object[@"state_code"] isEqualToString:@"0000"]) {
              _list = [MTLJSONAdapter modelsOfClass:[BeiJingModel class] fromJSONArray:object[@"data"][@"backgroundData"] error:nil];
             [_collectionview reloadData];
@@ -76,7 +76,8 @@
     BeijingCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"beijing_cell" forIndexPath:indexPath];
     cell.backgroundColor = [UIColor whiteColor];
     BeiJingModel *model = _list[indexPath.row];
-    [cell configWithModel:model];
+    cell.delegate = self;
+    [cell configWithModel:model index:indexPath.row];
     return cell;
 }
 
@@ -84,6 +85,40 @@
 {
     BeiJingModel *model = _list[indexPath.row];
   
+}
+
+-(void)clickAtIndex:(NSInteger)index{
+    BeiJingModel *model = _list[index];
+    if (model.goumai==1) {
+        //使用
+        
+        HZHttpClient *client = [HZHttpClient httpClient];
+        [client hcPOST:@"/v1/background/use" parameters:@{@"type":@"1",@"selectType":@"0",@"sz_id":_sz_id,@"background_id":model.background_id} success:^(NSURLSessionDataTask *task, id object) {
+            if ([object[@"state_code"] isEqualToString:@"0000"]) {
+                 [self requestList];;
+            }else{
+                [self.view makeCenterOffsetToast:object[@"msg"]];
+            }
+            
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            [self.view makeCenterOffsetToast:@"请求失败,请重试"];
+        }];
+    }else if(model.goumai==3){
+        
+    }else{
+        //购买
+        HZHttpClient *client = [HZHttpClient httpClient];
+        [client hcPOST:@"/v1/background/purchase" parameters:@{@"type":@"1",@"selectType":@"0",@"sz_id":_sz_id,@"background_id":model.background_id} success:^(NSURLSessionDataTask *task, id object) {
+            if ([object[@"state_code"] isEqualToString:@"0000"]) {
+                [self requestList];
+            }else{
+                [self.view makeCenterOffsetToast:object[@"msg"]];
+            }
+            
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            [self.view makeCenterOffsetToast:@"请求失败,请重试"];
+        }];
+    }
 }
 
 @end

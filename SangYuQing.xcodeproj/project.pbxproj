@@ -188,6 +188,9 @@
 		044ADF80200DD136006D8B19 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044ADF7F200DD136006D8B19 /* Foundation.framework */; };
 		044ADF82200DD13D006D8B19 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044ADF81200DD13D006D8B19 /* CFNetwork.framework */; };
 		044ADF84200DD146006D8B19 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044ADF83200DD146006D8B19 /* CoreMotion.framework */; };
+		044B428020118D3400FB283D /* UpLoadVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044B427F20118D3400FB283D /* UpLoadVideoViewController.m */; };
+		044B42832011B10200FB283D /* ShenHeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044B42822011B10200FB283D /* ShenHeListViewController.m */; };
+		0459808F2011D9A500CA9491 /* MuBeiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0459808E2011D9A500CA9491 /* MuBeiViewController.m */; };
 		04734F8020102C4900B9156A /* MyAddressPickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04734F7F20102C4900B9156A /* MyAddressPickView.m */; };
 		04734F832010335800B9156A /* CityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04734F822010335800B9156A /* CityModel.m */; };
 		04734F86201042ED00B9156A /* MuDiEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04734F85201042ED00B9156A /* MuDiEditViewController.m */; };
@@ -555,6 +558,12 @@
 		044ADF7F200DD136006D8B19 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		044ADF81200DD13D006D8B19 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		044ADF83200DD146006D8B19 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		044B427E20118D3400FB283D /* UpLoadVideoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpLoadVideoViewController.h; sourceTree = "<group>"; };
+		044B427F20118D3400FB283D /* UpLoadVideoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpLoadVideoViewController.m; sourceTree = "<group>"; };
+		044B42812011B10200FB283D /* ShenHeListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShenHeListViewController.h; sourceTree = "<group>"; };
+		044B42822011B10200FB283D /* ShenHeListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShenHeListViewController.m; sourceTree = "<group>"; };
+		0459808D2011D9A500CA9491 /* MuBeiViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MuBeiViewController.h; sourceTree = "<group>"; };
+		0459808E2011D9A500CA9491 /* MuBeiViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MuBeiViewController.m; sourceTree = "<group>"; };
 		04734F7E20102C4900B9156A /* MyAddressPickView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyAddressPickView.h; sourceTree = "<group>"; };
 		04734F7F20102C4900B9156A /* MyAddressPickView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyAddressPickView.m; sourceTree = "<group>"; };
 		04734F812010335800B9156A /* CityModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CityModel.h; sourceTree = "<group>"; };
@@ -935,6 +944,12 @@
 				04734F9920109B5500B9156A /* XiangCeGuanLIViewController.m */,
 				04734F9B20109BB000B9156A /* VideoGuanLiViewController.h */,
 				04734F9C20109BB000B9156A /* VideoGuanLiViewController.m */,
+				044B427E20118D3400FB283D /* UpLoadVideoViewController.h */,
+				044B427F20118D3400FB283D /* UpLoadVideoViewController.m */,
+				044B42812011B10200FB283D /* ShenHeListViewController.h */,
+				044B42822011B10200FB283D /* ShenHeListViewController.m */,
+				0459808D2011D9A500CA9491 /* MuBeiViewController.h */,
+				0459808E2011D9A500CA9491 /* MuBeiViewController.m */,
 			);
 			path = private;
 			sourceTree = "<group>";
@@ -1480,6 +1495,7 @@
 				"${PODS_ROOT}/DateTools/DateTools/DateTools/DateTools.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 				"${PODS_ROOT}/SSKeychain/Support/SSKeychain.bundle",
+				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -1555,6 +1571,7 @@
 				041E16FA200CDC3200B9FFA1 /* HZPageViewController.m in Sources */,
 				044ADF63200DB50B006D8B19 /* JiFenModel.m in Sources */,
 				041E1663200CDC2800B9FFA1 /* UserRegisterViewController.m in Sources */,
+				044B42832011B10200FB283D /* ShenHeListViewController.m in Sources */,
 				041E170E200CDC3200B9FFA1 /* JiWenDetailTableViewCell.m in Sources */,
 				041E16FD200CDC3200B9FFA1 /* PhotoModel.m in Sources */,
 				041E172D200CDC3200B9FFA1 /* XianHuaViewController.m in Sources */,
@@ -1591,6 +1608,7 @@
 				041E1621200CDC2300B9FFA1 /* HZBannerView.m in Sources */,
 				041E165B200CDC2800B9FFA1 /* UserScoreViewController.m in Sources */,
 				041E174A200CDC3700B9FFA1 /* HomeViewController.m in Sources */,
+				044B428020118D3400FB283D /* UpLoadVideoViewController.m in Sources */,
 				041E15C8200CDAA400B9FFA1 /* ViewController.m in Sources */,
 				041E17D4200CDD5800B9FFA1 /* HZVideoPlayerBottomView.m in Sources */,
 				041E17BB200CDC3E00B9FFA1 /* HZNotificationName.m in Sources */,
@@ -1648,6 +1666,7 @@
 				041E1719200CDC3200B9FFA1 /* ZhuiSiJiWenTableViewCell.m in Sources */,
 				041E165F200CDC2800B9FFA1 /* UserLoginViewController.m in Sources */,
 				041E16FE200CDC3200B9FFA1 /* DetailGiftModel.m in Sources */,
+				0459808F2011D9A500CA9491 /* MuBeiViewController.m in Sources */,
 				04734FA62010B67900B9156A /* TJZPCollectionViewCell.m in Sources */,
 				041E1701200CDC3200B9FFA1 /* LiuYanModel.m in Sources */,
 				041E1671200CDC2800B9FFA1 /* UserInfoViewController.m in Sources */,
@@ -1842,8 +1861,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = RGN8U623GW;
+				DEVELOPMENT_TEAM = 9L94RH6RPY;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SangYuQing/libray/alipay",
@@ -1909,11 +1929,11 @@
 					"\"WebKit\"",
 					"-Objc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.berlin.SangYuQing;
+				PRODUCT_BUNDLE_IDENTIFIER = com.oyuehui.SangYuQing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "65196e16-1f75-43e9-8a34-adaac780f985";
-				PROVISIONING_PROFILE_SPECIFIER = SangYuQing_dev;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				PROVISIONING_PROFILE = "26f5aa37-46f6-4498-9e8a-884444843d4c";
+				PROVISIONING_PROFILE_SPECIFIER = "Sangyuqing_ Development";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1925,7 +1945,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = RGN8U623GW;
+				DEVELOPMENT_TEAM = 9L94RH6RPY;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SangYuQing/libray/alipay",
@@ -1991,11 +2011,11 @@
 					"\"WebKit\"",
 					"-Objc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.berlin.SangYuQing;
+				PRODUCT_BUNDLE_IDENTIFIER = com.oyuehui.SangYuQing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "22180872-1286-433b-81ef-47ce6b34e9d6";
+				PROVISIONING_PROFILE = "f2726fc8-7b41-4635-934f-b87a9b38c654";
 				PROVISIONING_PROFILE_SPECIFIER = "SangYuQing_ Distribution";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "-[PrivateCreateViewController textFieldDidEndEditing:]:PrivateCreateViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "textField.text">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "__33-[MDDetailViewController confirm]_block_invoke_2:MDDetailViewController.m">
          <PersistentStrings>
             <PersistentString
@@ -23,6 +31,14 @@
          contextName = "-[AppDelegate loadCookies]:AppDelegate.m">
       </ContextState>
       <ContextState
+         contextName = "-[XiangCeListViewController edit]:XiangCeListViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_list">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "__37-[MDDetailViewController requestGift]_block_invoke:MDDetailViewController.m">
          <PersistentStrings>
             <PersistentString
@@ -34,6 +50,12 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "__40-[JiPinManageViewController requestGift]_block_invoke:JiPinManageViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "__40-[UserScoreViewController getOrderInfo:]_block_invoke_2:UserScoreViewController.m">
+      </ContextState>
+      <ContextState
          contextName = "__35-[UserScoreViewController getJiFen]_block_invoke:UserScoreViewController.m">
          <PersistentStrings>
             <PersistentString
@@ -42,24 +64,21 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "__40-[JiPinManageViewController requestGift]_block_invoke:JiPinManageViewController.m">
-      </ContextState>
-      <ContextState
-         contextName = "__40-[UserScoreViewController getOrderInfo:]_block_invoke_2:UserScoreViewController.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[UserScoreViewController payAliSuccess:]:UserScoreViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "notification.object">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "__39-[MDDetailViewController requestDetail]_block_invoke:MDDetailViewController.m">
       </ContextState>
       <ContextState
          contextName = "-[PrivateCreateViewController commit]:PrivateCreateViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[ZANImageShowViewController setup]:ZANImageShowViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_scrollView.width">
+            </PersistentString>
+            <PersistentString
+               value = "_scrollView.frame">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "-[UserScoreViewController collectionView:didHighlightItemAtIndexPath:]:UserScoreViewController.m">
@@ -73,21 +92,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[XiangCeListViewController edit]:XiangCeListViewController.m">
+         contextName = "-[UserScoreViewController payAliSuccess:]:UserScoreViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "_list">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[ZANImageShowViewController setup]:ZANImageShowViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "_scrollView.width">
-            </PersistentString>
-            <PersistentString
-               value = "_scrollView.frame">
+               value = "notification.object">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -106,6 +114,12 @@
                value = "info.mas_bottom">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__40-[VideoGuanLiViewController requestList]_block_invoke:VideoGuanLiViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "__39-[ShenHeListViewController requestList]_block_invoke:ShenHeListViewController.m">
       </ContextState>
       <ContextState
          contextName = "__44-[UserScoreDetailViewController requestList]_block_invoke:UserScoreDetailViewController.m">
@@ -141,10 +155,26 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "__35-[UpLoadVideoViewController commit]_block_invoke_2:UpLoadVideoViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "videoAlasset.defaultRepresentation.filename">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "__40-[UserScoreViewController getOrderInfo:]_block_invoke:UserScoreViewController.m">
       </ContextState>
       <ContextState
          contextName = "__42-[XiangCeGuanLIViewController requestList]_block_invoke:XiangCeGuanLIViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[ZANImageShowViewController viewWillLayoutSubviews]:ZANImageShowViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_scrollView.frame">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
    </ContextStates>
 </VariablesViewState>
