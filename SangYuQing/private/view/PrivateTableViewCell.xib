@@ -46,32 +46,32 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="生辰:1970-01-01" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XcF-oe-Q05">
-                        <rect key="frame" x="155" y="55" width="93" height="14.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <rect key="frame" x="155" y="55" width="79" height="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="忌辰:2018-12-29" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gfj-Uq-Yex">
-                        <rect key="frame" x="255" y="55" width="95.5" height="14.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <rect key="frame" x="284" y="55" width="81" height="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="祭奠:0人" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LjD-Hv-yNm">
-                        <rect key="frame" x="255" y="84" width="48" height="14.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <rect key="frame" x="284" y="81.5" width="40.5" height="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="创建时间:2017-12-28 17:00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="li4-0C-PTz">
-                        <rect key="frame" x="155" y="170" width="172.5" height="14.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <rect key="frame" x="155" y="172.5" width="146" height="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="访客:0人" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QIN-is-LdP">
-                        <rect key="frame" x="155" y="84" width="48" height="14.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <rect key="frame" x="155" y="81.5" width="40.5" height="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -90,8 +90,8 @@
                     <constraint firstAttribute="trailing" secondItem="TUl-Xi-PQW" secondAttribute="trailing" constant="10" id="Q3b-fI-J68"/>
                     <constraint firstItem="li4-0C-PTz" firstAttribute="bottom" secondItem="jVn-17-uBm" secondAttribute="bottom" constant="-5" id="R81-yS-lZF"/>
                     <constraint firstItem="Gfj-Uq-Yex" firstAttribute="top" secondItem="XcF-oe-Q05" secondAttribute="top" id="Ujx-9Y-mpb"/>
-                    <constraint firstAttribute="trailing" secondItem="LjD-Hv-yNm" secondAttribute="leading" constant="120" id="VWx-Pd-83g"/>
-                    <constraint firstAttribute="trailing" secondItem="Gfj-Uq-Yex" secondAttribute="leading" constant="120" id="db6-EY-Xmj"/>
+                    <constraint firstItem="LjD-Hv-yNm" firstAttribute="leading" secondItem="Gfj-Uq-Yex" secondAttribute="leading" id="cZw-09-2To"/>
+                    <constraint firstAttribute="trailing" secondItem="Gfj-Uq-Yex" secondAttribute="trailing" constant="10" id="db6-EY-Xmj"/>
                     <constraint firstItem="2RU-QQ-IvJ" firstAttribute="top" secondItem="jVn-17-uBm" secondAttribute="top" constant="6" id="kr8-d1-UrQ"/>
                     <constraint firstItem="TUl-Xi-PQW" firstAttribute="top" secondItem="2RU-QQ-IvJ" secondAttribute="top" id="u3f-zt-2a2"/>
                     <constraint firstItem="XcF-oe-Q05" firstAttribute="leading" secondItem="jVn-17-uBm" secondAttribute="trailing" constant="10" id="yFP-OL-gRD"/>
@@ -110,7 +110,7 @@
                 <outlet property="name_label" destination="2RU-QQ-IvJ" id="DzI-Yc-d8j"/>
                 <outlet property="time_label" destination="li4-0C-PTz" id="LPp-dY-aTG"/>
             </connections>
-            <point key="canvasLocation" x="191" y="-152"/>
+            <point key="canvasLocation" x="190.5" y="-152"/>
         </tableViewCell>
     </objects>
     <resources>

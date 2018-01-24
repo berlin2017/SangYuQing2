@@ -94,7 +94,7 @@
         //使用
         
         HZHttpClient *client = [HZHttpClient httpClient];
-        [client hcPOST:@"/v1/background/use" parameters:@{@"type":@"1",@"selectType":@"1",@"sz_id":_sz_id,@"background_id":model.background_id} success:^(NSURLSessionDataTask *task, id object) {
+        [client hcPOST:@"/v1/background/use" parameters:@{@"type":@"1",@"select_type":@"1",@"sz_id":_sz_id,@"background_id":model.background_id} success:^(NSURLSessionDataTask *task, id object) {
             if ([object[@"state_code"] isEqualToString:@"0000"]) {
                 [self requestList];;
             }else{
@@ -109,7 +109,7 @@
     }else{
         //购买
         HZHttpClient *client = [HZHttpClient httpClient];
-        [client hcPOST:@"/v1/background/purchase" parameters:@{@"type":@"1",@"selectType":@"1",@"sz_id":_sz_id,@"background_id":model.background_id} success:^(NSURLSessionDataTask *task, id object) {
+        [client hcPOST:@"/v1/background/purchase" parameters:@{@"type":@"1",@"select_type":@"1",@"sz_id":_sz_id,@"background_id":model.background_id} success:^(NSURLSessionDataTask *task, id object) {
             if ([object[@"state_code"] isEqualToString:@"0000"]) {
                 [self requestList];
             }else{

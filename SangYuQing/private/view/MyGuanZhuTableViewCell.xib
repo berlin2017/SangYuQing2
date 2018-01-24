@@ -33,32 +33,32 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="生辰:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XcF-oe-Q05">
-                        <rect key="frame" x="155" y="55" width="28.5" height="14.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <rect key="frame" x="155" y="55" width="24" height="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="忌辰:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gfj-Uq-Yex">
-                        <rect key="frame" x="255" y="55" width="28.5" height="14.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <rect key="frame" x="341" y="55" width="24" height="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="祭奠:0人" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LjD-Hv-yNm">
-                        <rect key="frame" x="255" y="84" width="48" height="14.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <rect key="frame" x="341" y="81.5" width="40.5" height="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="创建时间:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="li4-0C-PTz">
-                        <rect key="frame" x="155" y="170" width="53" height="14.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <rect key="frame" x="155" y="172.5" width="44" height="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="访客:0人" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QIN-is-LdP">
-                        <rect key="frame" x="155" y="84" width="48" height="14.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <rect key="frame" x="155" y="81.5" width="40.5" height="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -70,13 +70,13 @@
                     <constraint firstItem="jVn-17-uBm" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Bqu-47-mj4"/>
                     <constraint firstItem="QIN-is-LdP" firstAttribute="leading" secondItem="XcF-oe-Q05" secondAttribute="leading" id="CB9-TB-lXN"/>
                     <constraint firstItem="XcF-oe-Q05" firstAttribute="top" secondItem="2RU-QQ-IvJ" secondAttribute="bottom" constant="18" id="GPp-NL-hUD"/>
+                    <constraint firstItem="LjD-Hv-yNm" firstAttribute="leading" secondItem="Gfj-Uq-Yex" secondAttribute="leading" id="Gdp-bj-9bO"/>
                     <constraint firstItem="2RU-QQ-IvJ" firstAttribute="leading" secondItem="jVn-17-uBm" secondAttribute="trailing" constant="10" id="NNJ-pd-RYS"/>
                     <constraint firstAttribute="bottom" secondItem="jVn-17-uBm" secondAttribute="bottom" constant="10" id="Odf-6h-lec"/>
                     <constraint firstItem="li4-0C-PTz" firstAttribute="bottom" secondItem="jVn-17-uBm" secondAttribute="bottom" constant="-5" id="R81-yS-lZF"/>
                     <constraint firstItem="Gfj-Uq-Yex" firstAttribute="top" secondItem="XcF-oe-Q05" secondAttribute="top" id="Ujx-9Y-mpb"/>
-                    <constraint firstAttribute="trailing" secondItem="LjD-Hv-yNm" secondAttribute="leading" constant="120" id="VWx-Pd-83g"/>
-                    <constraint firstAttribute="trailing" secondItem="Gfj-Uq-Yex" secondAttribute="leading" constant="120" id="db6-EY-Xmj"/>
                     <constraint firstItem="2RU-QQ-IvJ" firstAttribute="top" secondItem="jVn-17-uBm" secondAttribute="top" constant="6" id="kr8-d1-UrQ"/>
+                    <constraint firstAttribute="trailing" secondItem="Gfj-Uq-Yex" secondAttribute="trailing" constant="10" id="weB-9d-9QR"/>
                     <constraint firstItem="XcF-oe-Q05" firstAttribute="leading" secondItem="jVn-17-uBm" secondAttribute="trailing" constant="10" id="yFP-OL-gRD"/>
                     <constraint firstItem="jVn-17-uBm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="zMw-OH-sj2"/>
                 </constraints>
