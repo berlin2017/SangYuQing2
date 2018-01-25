@@ -75,10 +75,10 @@
             
             
             [self.view makeCenterOffsetToast:@"登录成功"];
-            UserModel *user = [MTLJSONAdapter modelOfClass:[UserModel class] fromJSONDictionary:object[@"data"][@"userData"] error:nil];
-            [UserManager saveAhnUser:user];
-            [[NSNotificationCenter defaultCenter] postNotificationName:kZANUserLoginSuccessNotification object:nil];
-            [self.navigationController popViewControllerAnimated:YES];
+//            UserModel *user = [MTLJSONAdapter modelOfClass:[UserModel class] fromJSONDictionary:object[@"data"][@"userData"] error:nil];
+//            [UserManager saveAhnUser:user];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:kZANUserLoginSuccessNotification object:nil];
+//            [self.navigationController popViewControllerAnimated:YES];
         }else{
             [self.view makeCenterOffsetToast:@"登录失败,请重试"];
         }
