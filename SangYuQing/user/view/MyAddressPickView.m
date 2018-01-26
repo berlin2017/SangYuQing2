@@ -259,8 +259,12 @@ numberOfRowsInComponent:(NSInteger)component{
 -(void)requstProList{
     HZHttpClient *client = [HZHttpClient httpClient];
     [client hcPOST:@"/v1/ucenter/selfinfo" parameters:nil success:^(NSURLSessionDataTask *task, id object) {
-        _provinceList = [MTLJSONAdapter modelsOfClass:[CityModel class] fromJSONArray:object[@"data"][@"areaData"] error:nil];
-        [self requstCityList:0];
+        if([object[@"state_code"] isEqualToString:@"0000"]){
+            _provinceList = [MTLJSONAdapter modelsOfClass:[CityModel class] fromJSONArray:object[@"data"][@"areaData"] error:nil];
+            [self requstCityList:0];
+        }else{
+            [self makeCenterOffsetToast:object[@"msg"]];
+        }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
 //        [self.view makeCenterOffsetToast:@"请求失败,请重试"];
     }];

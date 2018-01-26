@@ -99,73 +99,71 @@
 }
 
 - (IBAction)registe:(id)sender {
-    [self checkName:_name_edit.text];
-    if (!_isRightName) {
-        return;
-    }
-    
-    if ([NSString isEmptyString:_phone_edit.text]) {
-        [self.view makeCenterOffsetToast:@"手机号不能为空"];
-        return;
-    }
-    [HZLoadingHUD showHUDInView:self.view];
-    HZHttpClient *client = [HZHttpClient httpClient];
-    [client hcPOST:@"/v1/login/checkisreg" parameters:@{@"mobile":_phone_edit.text} success:^(NSURLSessionDataTask *task, id object) {
-        if (![object[@"state_code"] isEqualToString:@"0000"]) {
-            [self.view makeCenterOffsetToast:@"手机号已被注册,请重新输入"];
-            [HZLoadingHUD hideHUDInView:self.view];
-        }else{
-            _isRightPhone = YES;
-            if ([NSString isEmptyString:_pass_edit1.text]) {
-                [self.view makeCenterOffsetToast:@"密码不能为空"];
-                return;
-            }
-            
-            if ([NSString isEmptyString:_pass_edit2.text]) {
-                [self.view makeCenterOffsetToast:@"请确认密码"];
-                return;
-            }
-            
-            if (![_pass_edit1.text isEqualToString:_pass_edit2.text]) {
-                [self.view makeCenterOffsetToast:@"两次密码不一致,请重新输入"];
-                return;
-            }
-            
-            if ([NSString isEmptyString:_phone_edit.text]) {
-                [self.view makeCenterOffsetToast:@"手机号不能为空"];
-                return;
-            }
-            
-            if ([NSString isEmptyString:_code_edit.text]) {
-                [self.view makeCenterOffsetToast:@"验证码不能为空"];
-                return;
-            }
-            
-            if(!_isChecked){
-                [self.view makeCenterOffsetToast:@"请勾选注册条款"];
-                return;
-            }
-            HZHttpClient *client2 = [HZHttpClient httpClient];
-            [client2 hcPOST:@"/v1/login/checkregister" parameters:@{@"mobile":_phone_edit.text,@"account_name":_name_edit.text,@"password":_pass_edit1.text,@"repassword":_pass_edit2.text,@"vercode":_code_edit.text} success:^(NSURLSessionDataTask *task, id object) {
-                if ([object[@"state_code"] isEqualToString:@"0000"]) {
-                    [self.view makeCenterOffsetToast:@"注册成功"];
-                    [self.navigationController popViewControllerAnimated:YES];
-                }else{
-                    [self.view makeCenterOffsetToast:object[@"msg"]];
-                }
-                [HZLoadingHUD hideHUDInView:self.view];
-            } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                [self.view makeCenterOffsetToast:@"请求失败,请重试"];
-                [HZLoadingHUD hideHUDInView:self.view];
-            }];
+        [self checkName:_name_edit.text];
+        if (!_isRightName) {
+            return;
         }
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        [self.view makeCenterOffsetToast:@"请求失败,请重试"];
-        [HZLoadingHUD hideHUDInView:self.view];
-    }];
     
-   
-   
+        if ([NSString isEmptyString:_phone_edit.text]) {
+            [self.view makeCenterOffsetToast:@"手机号不能为空"];
+            return;
+        }
+        [HZLoadingHUD showHUDInView:self.view];
+        HZHttpClient *client = [HZHttpClient httpClient];
+        [client hcPOST:@"/v1/login/checkisreg" parameters:@{@"mobile":_phone_edit.text} success:^(NSURLSessionDataTask *task, id object) {
+            if (![object[@"state_code"] isEqualToString:@"0000"]) {
+                [self.view makeCenterOffsetToast:@"手机号已被注册,请重新输入"];
+                [HZLoadingHUD hideHUDInView:self.view];
+            }else{
+                _isRightPhone = YES;
+                if ([NSString isEmptyString:_pass_edit1.text]) {
+                    [self.view makeCenterOffsetToast:@"密码不能为空"];
+                    return;
+                }
+    
+                if ([NSString isEmptyString:_pass_edit2.text]) {
+                    [self.view makeCenterOffsetToast:@"请确认密码"];
+                    return;
+                }
+    
+                if (![_pass_edit1.text isEqualToString:_pass_edit2.text]) {
+                    [self.view makeCenterOffsetToast:@"两次密码不一致,请重新输入"];
+                    return;
+                }
+    
+                if ([NSString isEmptyString:_phone_edit.text]) {
+                    [self.view makeCenterOffsetToast:@"手机号不能为空"];
+                    return;
+                }
+    
+                if ([NSString isEmptyString:_code_edit.text]) {
+                    [self.view makeCenterOffsetToast:@"验证码不能为空"];
+                    return;
+                }
+    
+                if(!_isChecked){
+                    [self.view makeCenterOffsetToast:@"请勾选注册条款"];
+                    return;
+                }
+                HZHttpClient *client2 = [HZHttpClient httpClient];
+                [client2 hcPOST:@"/v1/login/checkregister" parameters:@{@"mobile":_phone_edit.text,@"account_name":_name_edit.text,@"password":_pass_edit1.text,@"repassword":_pass_edit2.text,@"vercode":_code_edit.text} success:^(NSURLSessionDataTask *task, id object) {
+                    if ([object[@"state_code"] isEqualToString:@"0000"]) {
+                        [self.view makeCenterOffsetToast:@"注册成功"];
+                        [self.navigationController popViewControllerAnimated:YES];
+                    }else{
+                        [self.view makeCenterOffsetToast:object[@"msg"]];
+                    }
+                    [HZLoadingHUD hideHUDInView:self.view];
+                } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                    [self.view makeCenterOffsetToast:@"请求失败,请重试"];
+                    [HZLoadingHUD hideHUDInView:self.view];
+                }];
+            }
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            [self.view makeCenterOffsetToast:@"请求失败,请重试"];
+            [HZLoadingHUD hideHUDInView:self.view];
+        }];
+    
 }
 
 
@@ -204,15 +202,15 @@
                     [self.view makeCenterOffsetToast:object[@"msg"]];
                     
                 }
-                 [HZLoadingHUD hideHUDInView:self.view];
+                [HZLoadingHUD hideHUDInView:self.view];
             } failure:^(NSURLSessionDataTask *task, NSError *error) {
                 [self.view makeCenterOffsetToast:@"请求失败,请重试"];
-                 [HZLoadingHUD hideHUDInView:self.view];
+                [HZLoadingHUD hideHUDInView:self.view];
             }];
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         [self.view makeCenterOffsetToast:@"请求失败,请重试"];
-         [HZLoadingHUD hideHUDInView:self.view];
+        [HZLoadingHUD hideHUDInView:self.view];
     }];
     
 }

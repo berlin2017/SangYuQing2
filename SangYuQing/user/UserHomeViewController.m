@@ -126,7 +126,7 @@
         case 1:
             cell.imageView.image = [UIImage imageNamed:@"user_jifen"];
             cell.textLabel.text = @"我的积分";
-            if (_user) {
+            if (_user&&_user.bonus_point) {
                 cell.detailTextLabel.text = [NSString stringWithFormat:@"%zd",_user.bonus_point];
             }else{
                 cell.detailTextLabel.text = @"0";

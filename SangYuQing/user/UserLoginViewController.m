@@ -73,14 +73,18 @@
             [defaults setObject:cookiesData forKey:@"cookie"];
             [defaults synchronize];
             
-            
             [self.view makeCenterOffsetToast:@"登录成功"];
-//            UserModel *user = [MTLJSONAdapter modelOfClass:[UserModel class] fromJSONDictionary:object[@"data"][@"userData"] error:nil];
-//            [UserManager saveAhnUser:user];
-//            [[NSNotificationCenter defaultCenter] postNotificationName:kZANUserLoginSuccessNotification object:nil];
-//            [self.navigationController popViewControllerAnimated:YES];
+            UserModel *user = [MTLJSONAdapter modelOfClass:[UserModel class] fromJSONDictionary:object[@"data"][@"userData"] error:nil];
+            if(user){
+                [UserManager saveAhnUser:user];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kZANUserLoginSuccessNotification object:nil];
+                [self.navigationController popViewControllerAnimated:YES];
+            }else{
+                [self.view makeCenterOffsetToast:@"登录失败,请重试"];
+            }
+           
         }else{
-            [self.view makeCenterOffsetToast:@"登录失败,请重试"];
+            [self.view makeCenterOffsetToast:object[@"msg"]];
         }
         [HZLoadingHUD hideHUDInView:self.view];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {

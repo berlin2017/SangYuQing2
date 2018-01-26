@@ -36,9 +36,16 @@
 
 -(void)configWithModel:(UserModel*)model{
     if (model) {
-        [user_photo sd_setImageWithURL:[NSURL URLWithString:model.head_logo] placeholderImage:[UIImage imageNamed:@"ic_user"]];
-        user_name.text = model.nickname;
-        user_location.text = model.household_address;
+        if (model.head_logo) {
+             [user_photo sd_setImageWithURL:[NSURL URLWithString:model.head_logo] placeholderImage:[UIImage imageNamed:@"ic_user"]];
+        }
+        if (model.nickname) {
+            user_name.text = model.nickname;
+        }
+        if (model.household_address) {
+            user_location.text = model.household_address;
+        }
+        
     }else{
         user_photo.image = [UIImage imageNamed:@"ic_user"];
         user_name.text = @"未登录";

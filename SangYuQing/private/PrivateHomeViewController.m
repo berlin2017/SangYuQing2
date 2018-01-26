@@ -13,8 +13,6 @@
 #import "PrivateMoreViewController.h"
 #import "PrivateCreateViewController.h"
 #import "MDDetailViewController.h"
-#import "UserManager.h"
-#import "UserModel.h"
 #import "MuDIModel.h"
 #import "UserLoginViewController.h"
 #import "MyLikeViewController.h"
@@ -26,7 +24,6 @@
 }
 @property(nonatomic,strong) UIView *navigationView;       // 导航栏
 @property (nonatomic,strong) UIImageView *scaleImageView; // 顶部图片
-@property (nonatomic,strong) UserModel *user;
 @property(nonatomic,strong)UITableView *tableview;
 @property (nonatomic,strong) NSMutableArray *followarray;
 @property (nonatomic,strong) NSMutableArray *creatarray;
@@ -41,7 +38,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUserModel) name:kZANUserLoginSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUserModel) name:@"follow.notification" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUserModel) name:@"creat.notification" object:nil];
-    _user = [UserManager ahnUser];
     UIColor *bgColor = [UIColor colorWithPatternImage: [UIImage imageNamed:@"main_bg"]];
     [self.view setBackgroundColor:bgColor];
     

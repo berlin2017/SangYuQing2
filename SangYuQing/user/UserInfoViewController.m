@@ -173,7 +173,7 @@
         if (_photo) {
             [cell setPhotoWithImage:_photo];
         }else{
-            if (_user) {
+            if (_user&&_user.head_logo) {
                 [cell setPhotoWithUrl:_user.head_logo];
             }else{
                 [cell setPhotoWithImage:[UIImage imageNamed:@"ic_user"]];
@@ -187,11 +187,21 @@
     cell.backgroundColor = [UIColor colorWithHexString:@"DFDFDF"];
     switch (indexPath.row) {
         case 0:
-            [cell configWithName:@"用户名" value:_user.account_name];
+            if (_user&&_user.account_name) {
+                [cell configWithName:@"用户名" value:_user.account_name];
+            }else{
+                [cell configWithName:@"用户名" value:@""];
+            }
+            
             [cell hideRight];
             break;
         case 1:
-            [cell configWithName:@"昵称" value:_user.nickname];
+            if (_user&&_user.nickname) {
+               [cell configWithName:@"昵称" value:_user.nickname];
+            }else{
+                [cell configWithName:@"昵称" value:@""];
+            }
+            
             break;
         case 2:
             if (_user) {
@@ -205,10 +215,20 @@
             }
             break;
         case 3:
-            [cell configWithName:@"手机" value:_user.mobile];
+            if (_user&&_user.mobile) {
+                 [cell configWithName:@"手机" value:_user.mobile];
+            }else{
+                 [cell configWithName:@"手机" value:@""];
+            }
+           
             break;
         case 4:
-            [cell configWithName:@"籍贯" value:_user.household_address];
+            if (_user&&_user.household_address) {
+                 [cell configWithName:@"籍贯" value:_user.household_address];
+            }else{
+                 [cell configWithName:@"籍贯" value:@""];
+            }
+           
             break;
             
         default:
