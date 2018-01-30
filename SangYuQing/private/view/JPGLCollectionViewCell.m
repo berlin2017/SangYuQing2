@@ -7,7 +7,7 @@
 //
 
 #import "JPGLCollectionViewCell.h"
-#import "DetailGiftModel.h"
+#import "JPXModel.h"
 #import "JPModel.h"
 #import "JPUser.h"
 
@@ -18,7 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *type;
 @property (weak, nonatomic) IBOutlet UISwitch *switch_btn;
 
-@property(nonatomic,strong)DetailGiftModel*model;
+@property(nonatomic,strong)JPXModel*model;
 
 @end
 @implementation JPGLCollectionViewCell
@@ -30,7 +30,7 @@
     self.contentView.layer.borderColor = [UIColor colorWithHexString:@"CD853F"].CGColor;
 }
 
--(void)configWithModel:(DetailGiftModel *)model{
+-(void)configWithModel:(JPXModel *)model{
     _model = model;
     JPModel * jp = model.jipinInfo;
     JPUser * user = model.userInfo;
@@ -42,6 +42,12 @@
     }else{
         _type.text = [NSString stringWithFormat:@"剩余%zd天",model.expired_time/24/3600];
     }
+    if (model.is_show==1) {
+        [_switch_btn setOn:YES];
+    }else{
+        [_switch_btn setOn:NO];
+    }
+        
     [_switch_btn addTarget:self action:@selector(changed:) forControlEvents:UIControlEventValueChanged];
 }
 

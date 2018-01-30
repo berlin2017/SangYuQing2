@@ -101,7 +101,9 @@
     PhotoItem *model1 = _list[indexPath.row];
     XiangCeCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"xiangce_cell" forIndexPath:indexPath];
     cell.backgroundColor = [UIColor whiteColor];
-    model1.image = [NSString stringWithFormat:@"http://www.hwsyq.com/data/images/xiangce/%@",model1.image];
+    if(![model1.image hasPrefix:@"http:"]){
+        model1.image = [NSString stringWithFormat:@"http://www.hwsyq.com/data/images/xiangce/%@",model1.image];
+    }
     [cell configWithModel:model1 atIndex:indexPath.row];
     cell.delegate = self;
     return cell;

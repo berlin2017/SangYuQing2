@@ -102,7 +102,7 @@
     if(indexPath.row==4){
         return 140;
     }
-    return UITableViewAutomaticDimension;
+    return 60;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{

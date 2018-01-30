@@ -214,6 +214,7 @@
 		047A67A7200F40DC002558A9 /* JPUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 047A67A6200F40DC002558A9 /* JPUser.m */; };
 		047A67AB200F5E4E002558A9 /* OtherMoneyCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 047A67A9200F5E4E002558A9 /* OtherMoneyCollectionViewCell.m */; };
 		047A67AC200F5E4E002558A9 /* OtherMoneyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047A67AA200F5E4E002558A9 /* OtherMoneyCollectionViewCell.xib */; };
+		049A4ECA2020333400430080 /* JPXModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 049A4EC92020333400430080 /* JPXModel.m */; };
 		4A6680EF8DA2818A13A1C619 /* libPods-SangYuQing.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A241AB87E9863BCA2919E602 /* libPods-SangYuQing.a */; };
 /* End PBXBuildFile section */
 
@@ -604,6 +605,10 @@
 		047A67A8200F5E4E002558A9 /* OtherMoneyCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OtherMoneyCollectionViewCell.h; sourceTree = "<group>"; };
 		047A67A9200F5E4E002558A9 /* OtherMoneyCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OtherMoneyCollectionViewCell.m; sourceTree = "<group>"; };
 		047A67AA200F5E4E002558A9 /* OtherMoneyCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OtherMoneyCollectionViewCell.xib; sourceTree = "<group>"; };
+		049A4EBC201FF68300430080 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		049A4EBD201FF68300430080 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		049A4EC82020333400430080 /* JPXModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JPXModel.h; sourceTree = "<group>"; };
+		049A4EC92020333400430080 /* JPXModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JPXModel.m; sourceTree = "<group>"; };
 		1BDD54C333966E32228BB2C9 /* Pods-SangYuQing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SangYuQing.release.xcconfig"; path = "Pods/Target Support Files/Pods-SangYuQing/Pods-SangYuQing.release.xcconfig"; sourceTree = "<group>"; };
 		3997F7E8378DC0BC4F3D699A /* Pods-SangYuQing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SangYuQing.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SangYuQing/Pods-SangYuQing.debug.xcconfig"; sourceTree = "<group>"; };
 		A241AB87E9863BCA2919E602 /* libPods-SangYuQing.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SangYuQing.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -985,6 +990,8 @@
 				047A67A6200F40DC002558A9 /* JPUser.m */,
 				04734F902010840800B9156A /* BeiJingModel.h */,
 				04734F912010840800B9156A /* BeiJingModel.m */,
+				049A4EC82020333400430080 /* JPXModel.h */,
+				049A4EC92020333400430080 /* JPXModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1682,6 +1689,7 @@
 				041E1659200CDC2800B9FFA1 /* APOrderInfo.m in Sources */,
 				047A679B200EECFB002558A9 /* MyGuanZhuTableViewCell.m in Sources */,
 				041E17A4200CDC3E00B9FFA1 /* NSDate+Helper.m in Sources */,
+				049A4ECA2020333400430080 /* JPXModel.m in Sources */,
 				041E1732200CDC3200B9FFA1 /* JiPinViewController.m in Sources */,
 				041E174F200CDC3700B9FFA1 /* GongMuCollectionViewCell.m in Sources */,
 				047A67A7200F40DC002558A9 /* JPUser.m in Sources */,
@@ -1736,6 +1744,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				041E15CA200CDAA400B9FFA1 /* Base */,
+				049A4EBC201FF68300430080 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1744,6 +1753,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				041E15CF200CDAA400B9FFA1 /* Base */,
+				049A4EBD201FF68300430080 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -1755,6 +1765,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1810,6 +1821,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

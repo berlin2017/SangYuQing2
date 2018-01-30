@@ -213,9 +213,8 @@
             UserLoginViewController * viewController = [sb instantiateViewControllerWithIdentifier:@"user_login"];
             [viewController setHidesBottomBarWhenPushed:YES];
             [self.navigationController pushViewController:viewController animated:YES];
-             [HZLoadingHUD hideHUDInView:self.view];
         }
-        
+        [HZLoadingHUD hideHUDInView:self.view];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self.view makeCenterOffsetToast:@"上传失败,请重试"];
         [HZLoadingHUD hideHUDInView:self.view];

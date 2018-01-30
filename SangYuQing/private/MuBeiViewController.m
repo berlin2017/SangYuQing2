@@ -28,7 +28,7 @@
     [self.view setBackgroundColor:bgColor];
     
     UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
-    layout.itemSize = CGSizeMake(([UIScreen mainScreen].bounds.size.width-30)/2, ([UIScreen mainScreen].bounds.size.width-10)/8*3);
+    layout.itemSize = CGSizeMake(([UIScreen mainScreen].bounds.size.width-30)/2, 150);
     layout.minimumLineSpacing = 10;
     layout.minimumInteritemSpacing = 10;
     

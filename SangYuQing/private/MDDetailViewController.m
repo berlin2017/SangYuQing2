@@ -41,6 +41,7 @@
 @property(nonatomic,copy)NSMutableArray *names2;
 @property(nonatomic,copy)NSMutableArray *images2;
 
+@property(nonatomic,strong) UIView *gift_layout;
 @property(nonatomic,strong) GiftView *giftView;
 @property(nonatomic,assign) BOOL *isLike;
 
@@ -68,6 +69,8 @@
     self.navigationController.navigationBarHidden = YES;
     UIColor *bgColor = [UIColor colorWithPatternImage: [UIImage imageNamed:@"main_bg"]];
     [self.view setBackgroundColor:bgColor];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateGift) name:@"gift.manager" object:nil];
+    
     [self.view addSubview:self.navigationView];
     [self requestDetail];
     
@@ -161,6 +164,7 @@
         make.centerY.mas_equalTo(self.view).mas_equalTo(-10);
         make.height.mas_equalTo(65);
     }];
+    _name.lineBreakMode = NSLineBreakByClipping;
     _name.font = [UIFont systemFontOfSize:13];
     _name.textColor = [UIColor whiteColor];
     
@@ -175,6 +179,14 @@
     _photo.backgroundColor = [UIColor clearColor];
     //    photo.contentMode = UIViewContentModeScaleAspectFill;
 //    [_photo sd_setImageWithURL:[NSURL URLWithString:@"http://www.hwsyq.com/data/images/shizhe/2017091422292149.jpg"]];
+    
+    _gift_layout = [[UIView alloc]init];
+    [self.view addSubview:_gift_layout];
+    [_gift_layout mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(_navigationView.mas_bottom);
+        make.left.right.mas_equalTo(self.view);
+        make.bottom.mas_equalTo(collectionview2.mas_top);
+    }];
     
     [self requestGiftList];
     [self requestGift];
@@ -417,7 +429,7 @@
 -(void)clickWithModel:(GiftModel*)model{
     _gitModel = model;
     _giftView = [[GiftView alloc]init];
-    [_contentView addSubview:_giftView];
+    [_gift_layout addSubview:_giftView];
     [_giftView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.mas_equalTo(_contentView);
         make.width.mas_equalTo(60);
@@ -542,11 +554,17 @@
             return ;
         }
         HZHttpClient *client = [HZHttpClient httpClient];
-        int x = ceilf(_giftView.frame.origin.x*1.0);
-        int y = ceilf(_giftView.frame.origin.y*1.0);
+         float screenWith = [UIScreen mainScreen].bounds.size.width;
+        float width = _gift_layout.frame.size.height;
+        int x = ceilf(_giftView.frame.origin.x/screenWith*746*1.0);
+        int y = ceilf(_giftView.frame.origin.y/width*1200*1.0);
         [client hcPOST:@"/v1/ucenter/handle-jibai" parameters:@{@"jpid":[NSString stringWithFormat:@"%zd",_gitModel.jipin_id],@"sz_id":_sz_id,@"jbtype":@"1",@"posx":[NSString stringWithFormat:@"%zd",x],@"posy":[NSString stringWithFormat:@"%zd",y]} success:^(NSURLSessionDataTask *task, id object) {
             if ([object[@"state_code"] isEqualToString:@"0000"]) {
                 [_giftView finishEdit];
+                UserModel *user = [UserManager ahnUser];
+                user.bonus_point = user.bonus_point-_gitModel.jifen;
+                [UserManager saveAhnUser:user];
+                [[NSNotificationCenter defaultCenter]postNotificationName:@"user.jifen.change" object:nil];
                 NSLog(@"-----");
             }else if([object[@"state_code"] isEqualToString:@"9999"]){
                 [self.view makeCenterOffsetToast:@"登录信息已过期，请重新登录"];
@@ -573,13 +591,13 @@
             _giftList = [MTLJSONAdapter modelsOfClass:[DetailGiftModel class] fromJSONArray:object[@"data"] error:nil];
             for (DetailGiftModel*model in _giftList) {
                 float screenWith = [UIScreen mainScreen].bounds.size.width;
-                float width = [model.posx integerValue]*screenWith/1200;
-                float height = [model.posy integerValue]*(_contentView.frame.size.height)/746;
+                float width = [model.posx integerValue]*screenWith/746;
+                float height = [model.posy integerValue]*(_gift_layout.frame.size.height)/1200;
                 GiftView *git = [[GiftView alloc]initWithFrame:CGRectMake(width,height, 60, 60)];
                 JPModel *info = model.jipinInfo;
                 [git setImage:info.image];
                 [git finishEdit];
-                [self.view addSubview:git];
+                [_gift_layout addSubview:git];
             }
             NSLog(@"-----");
         }else if([object[@"state_code"] isEqualToString:@"9999"]){
@@ -593,6 +611,11 @@
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         [self.view makeCenterOffsetToast:@"获取礼物失败,请重试"];
     }];
+}
+
+-(void)updateGift{
+    [_gift_layout removeAllSubViews];
+    [self requestGift];
 }
 
 @end

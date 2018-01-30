@@ -1,0 +1,42 @@
+
+/* Class = "UITabBarItem"; title = "鲜花"; ObjectID = "68B-gx-bBR"; */
+"68B-gx-bBR.title" = "鲜花";
+
+/* Class = "UITabBarItem"; title = "祭品"; ObjectID = "AfX-O1-mhH"; */
+"AfX-O1-mhH.title" = "祭品";
+
+/* Class = "UITabBarItem"; title = "上香"; ObjectID = "Bzf-FW-t8h"; */
+"Bzf-FW-t8h.title" = "上香";
+
+/* Class = "UITabBarItem"; title = "首页"; ObjectID = "IDq-7N-JRv"; */
+"IDq-7N-JRv.title" = "首页";
+
+/* Class = "UITabBarItem"; title = "Item 2"; ObjectID = "Nge-JN-NM9"; */
+"Nge-JN-NM9.title" = "Item 2";
+
+/* Class = "UITextField"; placeholder = "hhh"; ObjectID = "Vk0-Ou-Vqh"; */
+"Vk0-Ou-Vqh.placeholder" = "hhh";
+
+/* Class = "UITabBarItem"; title = "个人中心"; ObjectID = "WQX-W5-KhE"; */
+"WQX-W5-KhE.title" = "个人中心";
+
+/* Class = "UITabBarItem"; title = "Item"; ObjectID = "ftj-eq-MeN"; */
+"ftj-eq-MeN.title" = "Item";
+
+/* Class = "UITabBarItem"; title = "Item"; ObjectID = "hSS-Ob-HIn"; */
+"hSS-Ob-HIn.title" = "Item";
+
+/* Class = "UITabBarItem"; title = "追思一生"; ObjectID = "img-Bc-N0o"; */
+"img-Bc-N0o.title" = "追思一生";
+
+/* Class = "UILabel"; text = "1/2"; ObjectID = "jfO-ph-gGC"; */
+"jfO-ph-gGC.text" = "1/2";
+
+/* Class = "UITabBarItem"; title = "私人墓园"; ObjectID = "k1D-Mc-qXD"; */
+"k1D-Mc-qXD.title" = "私人墓园";
+
+/* Class = "UITabBarItem"; title = "公共墓园"; ObjectID = "nS4-NZ-CkB"; */
+"nS4-NZ-CkB.title" = "公共墓园";
+
+/* Class = "UITabBarItem"; title = "装饰"; ObjectID = "sGX-1e-UxZ"; */
+"sGX-1e-UxZ.title" = "装饰";

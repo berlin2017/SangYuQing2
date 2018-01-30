@@ -7,15 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-@class DetailGiftModel;
+@class JPXModel;
 
 @protocol JPGLCollectionViewCellDelegate <NSObject>
 
 @optional
--(void)changed:(DetailGiftModel*)model show:(BOOL)show;
+-(void)changed:(JPXModel*)model show:(BOOL)show;
 @end
 
 @interface JPGLCollectionViewCell : UICollectionViewCell
 @property(nonatomic,weak)id<JPGLCollectionViewCellDelegate>delegate;
--(void)configWithModel:(DetailGiftModel *)model;
+-(void)configWithModel:(JPXModel *)model;
 @end

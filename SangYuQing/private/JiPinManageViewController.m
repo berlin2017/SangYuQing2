@@ -7,7 +7,7 @@
 //
 
 #import "JiPinManageViewController.h"
-#import "DetailGiftModel.h"
+#import "JPXModel.h"
 #import "UserLoginViewController.h"
 #import "JPGLCollectionViewCell.h"
 
@@ -28,7 +28,7 @@
     [self.view setBackgroundColor:bgColor];
     [self.view addSubview:self.navigationView];
     UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
-    layout.itemSize = CGSizeMake(([UIScreen mainScreen].bounds.size.width-30)/2, 100);
+    layout.itemSize = CGSizeMake(([UIScreen mainScreen].bounds.size.width-30)/2, 120);
     layout.minimumLineSpacing = 10;
     layout.minimumInteritemSpacing = 10;
     _collectionview = [[UICollectionView alloc]initWithFrame:CGRectZero collectionViewLayout:layout];
@@ -48,9 +48,9 @@
 
 -(void)requestGift{
     HZHttpClient *client = [HZHttpClient httpClient];
-    [client hcGET:@"/v1/shizhe/get-jipins" parameters:@{@"sz_id":_sz_id,@"jpx_type":@"1"} success:^(NSURLSessionDataTask *task, id object) {
+    [client hcGET:@"/v1/jipinxiang/get-jipins" parameters:@{@"sz_id":_sz_id,@"jpx_type":@"1"} success:^(NSURLSessionDataTask *task, id object) {
         if ([object[@"state_code"] isEqualToString:@"0000"]) {
-            _list = [MTLJSONAdapter modelsOfClass:[DetailGiftModel class] fromJSONArray:object[@"data"] error:nil];
+            _list = [MTLJSONAdapter modelsOfClass:[JPXModel class] fromJSONArray:object[@"data"][@"list"] error:nil];
             [_collectionview reloadData];
             NSLog(@"-----");
         }else if([object[@"state_code"] isEqualToString:@"9999"]){
@@ -77,7 +77,7 @@
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    DetailGiftModel *model1 = _list[indexPath.row];
+    JPXModel *model1 = _list[indexPath.row];
     JPGLCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"detail_guanli_cell" forIndexPath:indexPath];
     cell.backgroundColor = [UIColor whiteColor];
     cell.delegate = self;
@@ -90,13 +90,19 @@
    
 }
 
--(void)changed:(DetailGiftModel*)model show:(BOOL)show{
+-(void)changed:(JPXModel*)model show:(BOOL)show{
+    NSString *type;
+    if(show){
+        type = @"1";
+    }else{
+        type = @"0";
+    }
     [HZLoadingHUD showHUDInView:self.view];
    HZHttpClient *client =  [HZHttpClient httpClient];
-    [client hcPOST:@"/v1/jipinxiang/operate-jipin" parameters:@{} success:^(NSURLSessionDataTask *task, id object) {
+    [client hcPOST:@"/v1/jipinxiang/operate-jipin" parameters:@{@"szjpxid":[NSString stringWithFormat:@"%zd",model.szjpx_id],@"optype":type} success:^(NSURLSessionDataTask *task, id object) {
         [HZLoadingHUD hideHUDInView:self.view];
         if ([object[@"state_code"] isEqualToString:@"0000"]) {
-            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"gift.manager" object:nil];
         }else{
             [self.view makeCenterOffsetToast:object[@"msg"]];
         }

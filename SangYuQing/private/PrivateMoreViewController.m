@@ -52,6 +52,7 @@
     _tableview.dataSource = self;
     _tableview.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefreshing)];
     _tableview.mj_header.automaticallyChangeAlpha = YES;
+    _tableview.tableFooterView = [UIView new];
     [_tableview registerNib:[UINib nibWithNibName:@"PrivateTableViewCell" bundle:nil] forCellReuseIdentifier:@"siren_cell"];
     //    [tableview registerNib:[UINib nibWithNibName:@"PrivateTopTableViewCell" bundle:nil] forCellReuseIdentifier:@"siren_top_cell"];
     

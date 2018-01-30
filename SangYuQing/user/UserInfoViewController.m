@@ -42,6 +42,7 @@
     [self.view addSubview:self.navigationView];
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUserModel) name:kZANUserLoginSuccessNotification object:nil];
     
+    
     _user = [UserManager ahnUser];
     _tableview = [[UITableView alloc]init];
     _tableview.backgroundColor = [UIColor clearColor];
@@ -70,9 +71,25 @@
     return _pickerView;
 }
 
+
 -(void)updateUserModel{
     _user = [UserManager ahnUser];
-    [_tableview reloadData];
+    
+    [HZLoadingHUD showHUDInView:self.view];
+    HZHttpClient *client = [HZHttpClient httpClient];
+    [client hcGET:@"v1/login/userinfo" parameters:@{@"user_id":[NSString stringWithFormat:@"%zd",_user.user_id]} success:^(NSURLSessionDataTask *task, id object) {
+        if ([object[@"state_code"] integerValue] == 0000) {
+             _user = [MTLJSONAdapter modelOfClass:[UserModel class] fromJSONDictionary:object[@"data"] error:nil];
+            [UserManager saveAhnUser:_user];
+            [_tableview reloadData];
+        }else{
+            [self.view makeCenterOffsetToast:object[@"msg"]];
+        }
+        [HZLoadingHUD hideHUDInView:self.view];
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        [self.view makeCenterOffsetToast:@"请求失败,请重试"];
+        [HZLoadingHUD hideHUDInView:self.view];
+    }];
 }
 
 #pragma mark - AddressPickerViewDelegate

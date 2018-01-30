@@ -39,6 +39,8 @@
     _user = [UserManager ahnUser];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUserModel) name:kZANUserLoginSuccessNotification object:nil];
     
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUserModel) name:@"user.jifen.change" object:nil];
+    
     _tableview= [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     _tableview.backgroundColor = [UIColor clearColor];
     _tableview.tableFooterView = [UIView new];
@@ -50,9 +52,16 @@
     }];
     _tableview.delegate = self;
     _tableview.dataSource = self;
+    _tableview.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headRefresh)];
     [_tableview registerClass:[UITableViewCell class] forCellReuseIdentifier:@"user_cell"];
     [_tableview registerNib:[UINib nibWithNibName:@"UserHeaderTableViewCell" bundle:nil] forCellReuseIdentifier:@"user_header"];
     [self.view addSubview:self.navigationView];
+}
+
+-(void)headRefresh{
+    _user = [UserManager ahnUser];
+    [_tableview reloadData];
+    [_tableview.mj_header endRefreshing];
 }
 
 -(void)updateUserModel{

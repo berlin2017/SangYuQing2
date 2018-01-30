@@ -266,6 +266,7 @@
             user.bonus_point = jifen;
             [UserManager saveAhnUser:user];
             _score.text = [NSString stringWithFormat:@"%zd",jifen];
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"user.jifen.change" object:nil];
         }else  if ([object[@"state_code"] isEqualToString:@"9999"]){
             [self.view makeCenterOffsetToast:@"登录信息已过期，请重新登录"];
             UIStoryboard *sb = [UIStoryboard storyboardWithName:@"user" bundle:nil];
@@ -551,7 +552,8 @@
     [HZLoadingHUD showHUDInView:self.view];
     HZHttpClient *client = [HZHttpClient httpClient];
     JiFenModel *model = _list[_lastIndexPath.row];
-    [client hcPOST:@"/v1/jifen/gopay" parameters:@{@"money":[NSString stringWithFormat:@"%zd",model.money],@"pay_type":type,@"app_type":@"ios"} success:^(NSURLSessionDataTask *task, id object) {
+//    [client hcPOST:@"/v1/jifen/gopay" parameters:@{@"money":[NSString stringWithFormat:@"%zd",model.money],@"pay_type":type,@"app_type":@"ios"} success:^(NSURLSessionDataTask *task, id object) {
+         [client hcPOST:@"/v1/jifen/gopay" parameters:@{@"money":@"0.01",@"pay_type":type,@"app_type":@"ios"} success:^(NSURLSessionDataTask *task, id object) {
         if ([object[@"state_code"] isEqualToString:@"0000"]) {
             
             OrderInfo *order = [MTLJSONAdapter modelOfClass:[OrderInfo class] fromJSONDictionary:object[@"data"] error:nil];
@@ -572,7 +574,7 @@
                 request.sign= order.sign;
                 [WXApi sendReq:request];
             }else{
-                NSString *appScheme = @"2017101109241081";
+                NSString *appScheme = @"SangYuQing";
                 [[AlipaySDK defaultService] payOrder:order.orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
                     NSLog(@"reslut = %@",resultDic);
                 }];
