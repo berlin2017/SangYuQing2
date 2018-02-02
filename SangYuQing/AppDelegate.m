@@ -9,10 +9,8 @@
 #import "AppDelegate.h"
 #import "UIImageView+WebCache.h"
 #import "MLTransition.h"
-#import <AlipaySDK/AlipaySDK.h>
-#import "WXApi.h"
 
-@interface AppDelegate ()<WXApiDelegate>
+@interface AppDelegate ()
 
 @property (strong, nonatomic) UIView *lunchView;
 @end
@@ -24,7 +22,6 @@
     // Override point for customization after application launch.
     [self.window makeKeyAndVisible];
     
-    [WXApi registerApp:@"wx6b642202f57b9af8"];
     
     [MLTransition validatePanBackWithMLTransitionGestureRecognizerType:MLTransitionGestureRecognizerTypeScreenEdgePan];
     
@@ -107,56 +104,14 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
--(void)onResp:(BaseResp*)resp{
-    if ([resp isKindOfClass:[PayResp class]]){
-        PayResp*response=(PayResp*)resp;
-        switch(response.errCode){
-            case WXSuccess:
-                //服务器端查询支付通知或查询API返回的结果再提示成功
-                NSLog(@"支付成功");
-                 [[NSNotificationCenter defaultCenter] postNotificationName:@"wx.pay.success" object:nil];
-                break;
-            default:
-                NSLog(@"支付失败，retcode=%d",resp.errCode);
-                break;
-        }
-    }
-}
+
 
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
     
-    if ([url.host isEqualToString:@"safepay"]) {
-        //跳转支付宝钱包进行支付，处理支付结果
-        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
-            NSLog(@"result = %@",resultDic);
-        }];
-    }
-    return YES;
-}
 
-// NOTE: 9.0以后使用新API接口
-- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options
-{
-    if ([url.host isEqualToString:@"safepay"]) {
-        //跳转支付宝钱包进行支付，处理支付结果
-        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
-            if([resultDic[@"resultStatus"] isEqualToString:@"9000"]){
-               //支付成功
-                NSData *data = [resultDic[@"result"] dataUsingEncoding:NSUTF8StringEncoding];
-                NSDictionary *tempDictQueryDiamond = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-                NSString *no = tempDictQueryDiamond[@"alipay_trade_app_pay_response"][@"trade_no"];
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"ali.pay.success" object:no];
-            }
-            NSLog(@"result = %@",resultDic);
-        }];
-    }
-    if ([url.host isEqualToString:@"pay"]) {
-        return [WXApi handleOpenURL:url delegate:self];
-    }
-    
     return YES;
 }
 

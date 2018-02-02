@@ -172,11 +172,10 @@
 		041E17E3200CDD7C00B9FFA1 /* City.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E17DC200CDD7C00B9FFA1 /* City.m */; };
 		041E17E4200CDD7C00B9FFA1 /* Province.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E17E0200CDD7C00B9FFA1 /* Province.m */; };
 		041E17E5200CDD7C00B9FFA1 /* AddressPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E17E1200CDD7C00B9FFA1 /* AddressPickerView.m */; };
+		042177CD2023FCB700AA56A8 /* PayWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 042177CC2023FCB700AA56A8 /* PayWebViewController.m */; };
 		044ADF63200DB50B006D8B19 /* JiFenModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 044ADF62200DB50B006D8B19 /* JiFenModel.m */; };
 		044ADF66200DB919006D8B19 /* OrderInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 044ADF65200DB919006D8B19 /* OrderInfo.m */; };
 		044ADF69200DC358006D8B19 /* JiFenDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 044ADF68200DC358006D8B19 /* JiFenDetailModel.m */; };
-		044ADF6D200DD0D4006D8B19 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 044ADF6B200DD0D4006D8B19 /* AlipaySDK.bundle */; };
-		044ADF6E200DD0D4006D8B19 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044ADF6C200DD0D4006D8B19 /* AlipaySDK.framework */; };
 		044ADF70200DD0F4006D8B19 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 044ADF6F200DD0F4006D8B19 /* libc++.tbd */; };
 		044ADF72200DD0FD006D8B19 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 044ADF71200DD0FD006D8B19 /* libz.tbd */; };
 		044ADF74200DD105006D8B19 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044ADF73200DD105006D8B19 /* SystemConfiguration.framework */; };
@@ -540,14 +539,14 @@
 		041E17DF200CDD7C00B9FFA1 /* City.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = City.h; sourceTree = "<group>"; };
 		041E17E0200CDD7C00B9FFA1 /* Province.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Province.m; sourceTree = "<group>"; };
 		041E17E1200CDD7C00B9FFA1 /* AddressPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressPickerView.m; sourceTree = "<group>"; };
+		042177CB2023FCB700AA56A8 /* PayWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PayWebViewController.h; sourceTree = "<group>"; };
+		042177CC2023FCB700AA56A8 /* PayWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PayWebViewController.m; sourceTree = "<group>"; };
 		044ADF61200DB50B006D8B19 /* JiFenModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JiFenModel.h; sourceTree = "<group>"; };
 		044ADF62200DB50B006D8B19 /* JiFenModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JiFenModel.m; sourceTree = "<group>"; };
 		044ADF64200DB919006D8B19 /* OrderInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderInfo.h; sourceTree = "<group>"; };
 		044ADF65200DB919006D8B19 /* OrderInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderInfo.m; sourceTree = "<group>"; };
 		044ADF67200DC358006D8B19 /* JiFenDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JiFenDetailModel.h; sourceTree = "<group>"; };
 		044ADF68200DC358006D8B19 /* JiFenDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JiFenDetailModel.m; sourceTree = "<group>"; };
-		044ADF6B200DD0D4006D8B19 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
-		044ADF6C200DD0D4006D8B19 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
 		044ADF6F200DD0F4006D8B19 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		044ADF71200DD0FD006D8B19 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		044ADF73200DD105006D8B19 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -631,7 +630,6 @@
 				044ADF72200DD0FD006D8B19 /* libz.tbd in Frameworks */,
 				044ADF70200DD0F4006D8B19 /* libc++.tbd in Frameworks */,
 				4A6680EF8DA2818A13A1C619 /* libPods-SangYuQing.a in Frameworks */,
-				044ADF6E200DD0D4006D8B19 /* AlipaySDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -823,6 +821,8 @@
 				041E162C200CDC2800B9FFA1 /* UserSettingsViewController.h */,
 				041E1657200CDC2800B9FFA1 /* UserSettingsViewController.m */,
 				041E163C200CDC2800B9FFA1 /* view */,
+				042177CB2023FCB700AA56A8 /* PayWebViewController.h */,
+				042177CC2023FCB700AA56A8 /* PayWebViewController.m */,
 			);
 			path = user;
 			sourceTree = "<group>";
@@ -1248,7 +1248,6 @@
 		041E17C4200CDD5800B9FFA1 /* libray */ = {
 			isa = PBXGroup;
 			children = (
-				044ADF6A200DD0C8006D8B19 /* alipay */,
 				041E17DA200CDD7C00B9FFA1 /* AddressPickerView */,
 				041E17C5200CDD5800B9FFA1 /* HZVideoPlayer */,
 				041E17CC200CDD5800B9FFA1 /* HZLoadingHUD */,
@@ -1290,15 +1289,6 @@
 				041E17E1200CDD7C00B9FFA1 /* AddressPickerView.m */,
 			);
 			path = AddressPickerView;
-			sourceTree = "<group>";
-		};
-		044ADF6A200DD0C8006D8B19 /* alipay */ = {
-			isa = PBXGroup;
-			children = (
-				044ADF6B200DD0D4006D8B19 /* AlipaySDK.bundle */,
-				044ADF6C200DD0D4006D8B19 /* AlipaySDK.framework */,
-			);
-			path = alipay;
 			sourceTree = "<group>";
 		};
 		DBAB2787486B94130DA01268 /* Frameworks */ = {
@@ -1450,7 +1440,6 @@
 				041E1713200CDC3200B9FFA1 /* ZhuiSiJieShaoTableViewCell.xib in Resources */,
 				041E171D200CDC3200B9FFA1 /* ZhuiSiJiWenTableViewCell.xib in Resources */,
 				041E1727200CDC3200B9FFA1 /* DetailVideoCollectionViewCell.xib in Resources */,
-				044ADF6D200DD0D4006D8B19 /* AlipaySDK.bundle in Resources */,
 				04734F97201085C900B9156A /* BeijingCollectionViewCell.xib in Resources */,
 				041E1728200CDC3200B9FFA1 /* XiangCeCollectionViewCell.xib in Resources */,
 				04734FA22010A0F700B9156A /* CJXCCollectionViewCell.xib in Resources */,
@@ -1631,6 +1620,7 @@
 				041E15D3200CDAA400B9FFA1 /* main.m in Sources */,
 				041E174D200CDC3700B9FFA1 /* MuDIModel.m in Sources */,
 				041E16F8200CDC3200B9FFA1 /* JiWenMoreViewController.m in Sources */,
+				042177CD2023FCB700AA56A8 /* PayWebViewController.m in Sources */,
 				041E1674200CDC2800B9FFA1 /* UserSettingsViewController.m in Sources */,
 				041E17B4200CDC3E00B9FFA1 /* UIView+Helper.m in Sources */,
 				041E171C200CDC3200B9FFA1 /* GiftCollectionViewCell.m in Sources */,
@@ -1876,14 +1866,60 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 9L94RH6RPY;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/SangYuQing/libray/alipay",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREFIX_HEADER = SangYuQing/base/HZPrefixHeader.pch;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/CTAssetsPickerController\"",
+					"\"${PODS_ROOT}/Headers/Public/DateTools\"",
+					"\"${PODS_ROOT}/Headers/Public/HUPhotoBrowser\"",
+					"\"${PODS_ROOT}/Headers/Public/LBBlurredImage\"",
+					"\"${PODS_ROOT}/Headers/Public/LXReorderableCollectionViewFlowLayout\"",
+					"\"${PODS_ROOT}/Headers/Public/MJRefresh\"",
+					"\"${PODS_ROOT}/Headers/Public/MLTransition\"",
+					"\"${PODS_ROOT}/Headers/Public/MMPopupView\"",
+					"\"${PODS_ROOT}/Headers/Public/Mantle\"",
+					"\"${PODS_ROOT}/Headers/Public/Masonry\"",
+					"\"${PODS_ROOT}/Headers/Public/NJKWebViewProgress\"",
+					"\"${PODS_ROOT}/Headers/Public/RegexKitLite\"",
+					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
+					"\"${PODS_ROOT}/Headers/Public/SKTagView\"",
+					"\"${PODS_ROOT}/Headers/Public/SSKeychain\"",
+					"\"${PODS_ROOT}/Headers/Public/SVProgressHUD\"",
+					"\"${PODS_ROOT}/Headers/Public/Toast\"",
+					"\"${PODS_ROOT}/Headers/Public/UITableView+FDTemplateLayoutCell\"",
+					"\"${PODS_ROOT}/Headers/Public/WebViewJavascriptBridge\"",
+					"\"${PODS_ROOT}/Headers/Public/iCarousel\"",
+				);
 				INFOPLIST_FILE = SangYuQing/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/AFNetworking\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/CTAssetsPickerController\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/DateTools\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/HUPhotoBrowser\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/LBBlurredImage\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/LXReorderableCollectionViewFlowLayout\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/MJRefresh\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/MLTransition\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/MMPopupView\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Mantle\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Masonry\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/NJKWebViewProgress\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/RegexKitLite\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SDWebImage\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SKTagView\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SSKeychain\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SVProgressHUD\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Toast\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/UITableView+FDTemplateLayoutCell\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/WebViewJavascriptBridge\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/iCarousel\"",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1904,7 +1940,6 @@
 					"-l\"SSKeychain\"",
 					"-l\"Toast\"",
 					"-l\"UITableView+FDTemplateLayoutCell\"",
-					"-l\"WeChatSDK\"",
 					"-l\"WebViewJavascriptBridge\"",
 					"-l\"c++\"",
 					"-l\"iCarousel\"",
@@ -1958,14 +1993,60 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 9L94RH6RPY;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/SangYuQing/libray/alipay",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREFIX_HEADER = SangYuQing/base/HZPrefixHeader.pch;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/CTAssetsPickerController\"",
+					"\"${PODS_ROOT}/Headers/Public/DateTools\"",
+					"\"${PODS_ROOT}/Headers/Public/HUPhotoBrowser\"",
+					"\"${PODS_ROOT}/Headers/Public/LBBlurredImage\"",
+					"\"${PODS_ROOT}/Headers/Public/LXReorderableCollectionViewFlowLayout\"",
+					"\"${PODS_ROOT}/Headers/Public/MJRefresh\"",
+					"\"${PODS_ROOT}/Headers/Public/MLTransition\"",
+					"\"${PODS_ROOT}/Headers/Public/MMPopupView\"",
+					"\"${PODS_ROOT}/Headers/Public/Mantle\"",
+					"\"${PODS_ROOT}/Headers/Public/Masonry\"",
+					"\"${PODS_ROOT}/Headers/Public/NJKWebViewProgress\"",
+					"\"${PODS_ROOT}/Headers/Public/RegexKitLite\"",
+					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
+					"\"${PODS_ROOT}/Headers/Public/SKTagView\"",
+					"\"${PODS_ROOT}/Headers/Public/SSKeychain\"",
+					"\"${PODS_ROOT}/Headers/Public/SVProgressHUD\"",
+					"\"${PODS_ROOT}/Headers/Public/Toast\"",
+					"\"${PODS_ROOT}/Headers/Public/UITableView+FDTemplateLayoutCell\"",
+					"\"${PODS_ROOT}/Headers/Public/WebViewJavascriptBridge\"",
+					"\"${PODS_ROOT}/Headers/Public/iCarousel\"",
+				);
 				INFOPLIST_FILE = SangYuQing/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/AFNetworking\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/CTAssetsPickerController\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/DateTools\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/HUPhotoBrowser\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/LBBlurredImage\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/LXReorderableCollectionViewFlowLayout\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/MJRefresh\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/MLTransition\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/MMPopupView\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Mantle\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Masonry\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/NJKWebViewProgress\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/RegexKitLite\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SDWebImage\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SKTagView\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SSKeychain\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SVProgressHUD\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Toast\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/UITableView+FDTemplateLayoutCell\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/WebViewJavascriptBridge\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/iCarousel\"",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1986,7 +2067,6 @@
 					"-l\"SSKeychain\"",
 					"-l\"Toast\"",
 					"-l\"UITableView+FDTemplateLayoutCell\"",
-					"-l\"WeChatSDK\"",
 					"-l\"WebViewJavascriptBridge\"",
 					"-l\"c++\"",
 					"-l\"iCarousel\"",

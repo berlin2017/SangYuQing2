@@ -21,7 +21,7 @@ pod 'RegexKitLite'
 pod 'DateTools'
 pod 'WebViewJavascriptBridge'
 pod 'iCarousel'
-pod 'WechatOpenSDK'
+#pod 'WechatOpenSDK'
 pod 'HUPhotoBrowser'
 
 end

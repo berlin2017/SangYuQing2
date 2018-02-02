@@ -16,10 +16,9 @@
 #import "UserManager.h"
 #import "UserLoginViewController.h"
 #import "OrderInfo.h"
-#import "WXApi.h"
-#import <AlipaySDK/AlipaySDK.h>
 #import "OtherMoneyCollectionViewCell.h"
 #import "JiFenModel.h"
+#import "HZWebBaseViewController.h"
 
 @interface UserScoreViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UITextFieldDelegate>
 @property(nonatomic,strong) UIView *navigationView;       // 导航栏
@@ -552,33 +551,12 @@
     [HZLoadingHUD showHUDInView:self.view];
     HZHttpClient *client = [HZHttpClient httpClient];
     JiFenModel *model = _list[_lastIndexPath.row];
-//    [client hcPOST:@"/v1/jifen/gopay" parameters:@{@"money":[NSString stringWithFormat:@"%zd",model.money],@"pay_type":type,@"app_type":@"ios"} success:^(NSURLSessionDataTask *task, id object) {
-         [client hcPOST:@"/v1/jifen/gopay" parameters:@{@"money":@"0.01",@"pay_type":type,@"app_type":@"ios"} success:^(NSURLSessionDataTask *task, id object) {
+    [client hcPOST:@"/v1/jifen/gopay" parameters:@{@"money":[NSString stringWithFormat:@"%zd",model.money],@"pay_type":type,@"app_type":@"ios"} success:^(NSURLSessionDataTask *task, id object) {
+//         [client hcPOST:@"/v1/jifen/gopay" parameters:@{@"money":@"0.01",@"pay_type":type,@"app_type":@"ios"} success:^(NSURLSessionDataTask *task, id object) {
         if ([object[@"state_code"] isEqualToString:@"0000"]) {
             
-            OrderInfo *order = [MTLJSONAdapter modelOfClass:[OrderInfo class] fromJSONDictionary:object[@"data"] error:nil];
-            _order = order;
-            if ([type isEqualToString:@"wechat"]) {
-                PayReq *request = [[PayReq alloc] init];
-                
-                request.partnerId = @"1495148402";
-                
-                request.prepayId= order.prepay_id;
-                
-                request.package = order.package;
-                
-                request.nonceStr= order.nonce_str;
-                
-                request.timeStamp= order.timestamp;
-                
-                request.sign= order.sign;
-                [WXApi sendReq:request];
-            }else{
-                NSString *appScheme = @"SangYuQing";
-                [[AlipaySDK defaultService] payOrder:order.orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
-                    NSLog(@"reslut = %@",resultDic);
-                }];
-            }
+            HZWebBaseViewController *controller = [[HZWebBaseViewController alloc]initWithURL:[NSURL URLWithString:@"https://www.baidu.com/"] actionButtonMode:HZWebActionButtonNone];
+            [self.navigationController pushViewController:controller animated:YES];
             
         }else  if ([object[@"state_code"] isEqualToString:@"9999"]){
             [self.view makeCenterOffsetToast:@"登录信息已过期，请重新登录"];
@@ -602,126 +580,16 @@
 }
 
 -(void)aliPay{
-    //    // 重要说明
-    //    // 这里只是为了方便直接向商户展示支付宝的整个支付流程；所以Demo中加签过程直接放在客户端完成；
-    //    // 真实App里，privateKey等数据严禁放在客户端，加签过程务必要放在服务端完成；
-    //    // 防止商户私密数据泄露，造成不必要的资金损失，及面临各种安全风险；
-    //    /*============================================================================*/
-    //    /*=======================需要填写商户app申请的===================================*/
-    //    /*============================================================================*/
-    //    NSString *appID = @"2017101009233282";
-    //
-    //    // 如下私钥，rsa2PrivateKey 或者 rsaPrivateKey 只需要填入一个
-    //    // 如果商户两个都设置了，优先使用 rsa2PrivateKey
-    //    // rsa2PrivateKey 可以保证商户交易在更加安全的环境下进行，建议使用 rsa2PrivateKey
-    //    // 获取 rsa2PrivateKey，建议使用支付宝提供的公私钥生成工具生成，
-    //    // 工具地址：https://doc.open.alipay.com/docs/doc.htm?treeId=291&articleId=106097&docType=1
-    //    NSString *rsa2PrivateKey = @"MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCZArg62iof19Bphh+AJa0VbU/ilQDVQzj7iGhjq4ntZFSUec21xeA1jNw5oo+stHJT40n8UFE3K4ev+kaGkhouXlZYJLsxksRtMPQ3cSEcE1ufIL8/2W8uXKr273PtW4n/jg23nBXUyusQLT6L57kk/pU0dV7R8d/fZTEzbnTIFXneXTdQp+LmITotSQ3UxFAM6Dv7ofVc2THJwKeJueGl4Xogrv1lvU1+T+cszQ+Zvi1hFm2h4Vr+Ibtv9GKlRlJURvrB+rBeHAvsiehBNMxFXXwJWjsr+yoCbfnTWsKnSUrKMSZRiR+HnGeJ/8UjLexe0HR6Hgyhy2xJrBuDuvUvAgMBAAECggEATehFl6mnkykWs/QXq+8DDwrmhu7pSqz8oY4V4NHh256fNi5CoJANFhcPtsTftMb4A2CSNkdK4vVmFCMxr6lKbVuZSS4Cpj4dh59KacRPYHU2zHInDsKOSqPiZPMNKsjWHendcCSoNP3Q7B6tXxzwdzatD9XHHsyx+ZQTliVijtEY/WzteW9sZdnf2LaTbQ0uDgxWd+u/oJc2HHiWiVXZKVT+xBwRP+1j9S6uZ2hHNDRp6Uzc5ENSAymjCIFvn0aR6QC8AC5tpIRMxgLRU8NzVqJEmk5e0KPtQkKlaG8O4t30SmuImS3umAaxOf2M59s1F1/3uFHVpB9UqsHMsvtSsQKBgQD8dYjdNeDHjNBGmnwnioL9fQyk8B12741UicTYBOwD1krdil7eqUkrA20FiD8N9wOKO2SrDKPOeMAYnDwiIdZYPSf0QQPZ1Yic+TDrNQ+ARfDr3VTETcuqpCVeDxV2u6NYWn7x9seTN/f9tJDE/SI+jZS+A+PBGlXRie+HsB/eNwKBgQCbKBxkD08o30VyMxOCeamFHBB9oFlAXgH4y0pS3ERuH6J0xwW/OO5kqvfYC3GMCermTuyf0D4XbDpwedlJJ3GIabnhZ1RX2YGOT3s1sQWYo2dp4K1IqR8qQYnEfOlqr1ljla41FeXMjhSsPEp/viNU3bj0OaeYaJKupCkfQ1hkyQKBgFIEMRmEhmjtw0Acshb6dcG6XWA8LaZU/ronI872EmLQvHOqn1WA86dIrqNsduenhvvifbrgGVtbeTTFlPeVvJfgDlnYwVKEf6RXhF/1VfrbPgCyX/aCO5dNSmJ7TgLLxK5QgAtFm+Kk/Sjr/1gv0G83+cmdY+F5F8ZCJJIVUtUTAoGAdnfR9bSaxKJ17BSDuQQcI76h+MoOW89rwgO25D27IjqVWIT+JlvZ6pOAWj2inUKVUPTCR+RBBLFmjar79ZdgYMAZZbn39HvnKDoX4Y8grsNVmsoqhWhcm28fOiAGOadZoWgQdAgcRmvV7Qy79X3AjHQfXJsJFJ4EIcTGgVBylcECgYAB7UEd6dAzh33B1VKUTK3GBue8TeX9A0tQHP4e348stwWmFAxQmZxX/WV7/ePaQLFpcXrPoUEVgc92T0gRC/JcQisnzwZP++fOL5a6eVEuXI3KdC0qeKtRcYkqs7bIA+fDFp13XlhWHy6fYmE/J3Ytp5mmZdVAGSQZMzRMqhu/Nw==";
-    //    NSString *rsaPrivateKey = @"";
-    //    /*============================================================================*/
-    //    /*============================================================================*/
-    //    /*============================================================================*/
-    //
-    //    //partner和seller获取失败,提示
-    //    if ([appID length] == 0 ||
-    //        ([rsa2PrivateKey length] == 0 && [rsaPrivateKey length] == 0))
-    //    {
-    //        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示"
-    //                                                                       message:@"缺少appId或者私钥,请检查参数设置"
-    //                                                                preferredStyle:UIAlertControllerStyleAlert];
-    //        UIAlertAction *action = [UIAlertAction actionWithTitle:@"知道了"
-    //                                                         style:UIAlertActionStyleDefault
-    //                                                       handler:^(UIAlertAction *action){
-    //
-    //                                                       }];
-    //        [alert addAction:action];
-    //        [self presentViewController:alert animated:YES completion:^{ }];
-    //        return;
-    //    }
-    //
-    //    /*
-    //     *生成订单信息及签名
-    //     */
-    //    //将商品信息赋予AlixPayOrder的成员变量
-    //    APOrderInfo* order = [APOrderInfo new];
-    //
-    //    // NOTE: app_id设置
-    //    order.app_id = appID;
-    //
-    //    // NOTE: 支付接口名称
-    //    order.method = @"alipay.trade.app.pay";
-    //
-    //    // NOTE: 参数编码格式
-    //    order.charset = @"utf-8";
-    //
-    //    // NOTE: 当前时间点
-    //    NSDateFormatter* formatter = [NSDateFormatter new];
-    //    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    //    order.timestamp = [formatter stringFromDate:[NSDate date]];
-    //
-    //    // NOTE: 支付版本
-    //    order.version = @"1.0";
-    //
-    //    // NOTE: sign_type 根据商户设置的私钥来决定
-    //    order.sign_type = (rsa2PrivateKey.length > 1)?@"RSA2":@"RSA";
-    //
-    //    // NOTE: 商品数据
-    //    order.biz_content = [APBizContent new];
-    //    order.biz_content.body = @"我是测试数据";
-    //    order.biz_content.subject = @"1";
-    //    order.biz_content.out_trade_no = [self generateTradeNO]; //订单ID（由商家自行制定）
-    //    order.biz_content.timeout_express = @"30m"; //超时时间设置
-    //    order.biz_content.total_amount = [NSString stringWithFormat:@"%.2f", 0.01]; //商品价格
-    //
-    //    //将商品信息拼接成字符串
-    //    NSString *orderInfo = [order orderInfoEncoded:NO];
-    //    NSString *orderInfoEncoded = [order orderInfoEncoded:YES];
-    //    NSLog(@"orderSpec = %@",orderInfo);
-    //
-    //    // NOTE: 获取私钥并将商户信息签名，外部商户的加签过程请务必放在服务端，防止公私钥数据泄露；
-    //    //       需要遵循RSA签名规范，并将签名字符串base64编码和UrlEncode
-    //    NSString *signedString = nil;
-    //    APRSASigner* signer = [[APRSASigner alloc] initWithPrivateKey:((rsa2PrivateKey.length > 1)?rsa2PrivateKey:rsaPrivateKey)];
-    //    if ((rsa2PrivateKey.length > 1)) {
-    //        signedString = [signer signString:orderInfo withRSA2:YES];
-    //    } else {
-    //        signedString = [signer signString:orderInfo withRSA2:NO];
-    //    }
-    //
-    //    // NOTE: 如果加签成功，则继续执行支付
-    //    if (signedString != nil) {
-    //        //应用注册scheme,在AliSDKDemo-Info.plist定义URL types
-    //        NSString *appScheme = @"alisdkdemo";
-    //
-    //        // NOTE: 将签名成功字符串格式化为订单字符串,请严格按照该格式
-    //        NSString *orderString = [NSString stringWithFormat:@"%@&sign=%@",
-    //                                 orderInfoEncoded, signedString];
-    //
-    //        // NOTE: 调用支付结果开始支付
-    //        [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
-    //            NSLog(@"reslut = %@",resultDic);
-    //        }];
-    //    }
+
 }
 
-
-
-#pragma mark -
-#pragma mark   ==============产生随机订单号==============
-
-- (NSString *)generateTradeNO
-{
-    static int kNumber = 15;
-    NSString *sourceStr = @"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    NSMutableString *resultStr = [[NSMutableString alloc] init];
-    srand((unsigned)time(0));
-    for (int i = 0; i < kNumber; i++)
-    {
-        unsigned index = rand() % [sourceStr length];
-        NSString *oneStr = [sourceStr substringWithRange:NSMakeRange(index, 1)];
-        [resultStr appendString:oneStr];
-    }
-    return resultStr;
+-(void)viewDidDisappear:(BOOL)animated{
+    [self.navigationController setNavigationBarHidden:NO];
 }
+
+-(void)viewDidAppear:(BOOL)animated{
+    [self.navigationController setNavigationBarHidden:YES];
+}
+
 
 @end
