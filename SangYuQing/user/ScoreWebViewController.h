@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "HZWebBaseViewController.h"
 
-@interface PayWebViewController :HZWebBaseViewController
+@interface ScoreWebViewController :HZWebBaseViewController
+
+@property(nonatomic,copy)NSString *url;
 
 @end

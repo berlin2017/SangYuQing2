@@ -1,13 +1,14 @@
+////
+////  UserScoreViewController.h
+////  SangYuQing
+////
+////  Created by mac on 2018/1/8.
+////  Copyright © 2018年 mac. All rights reserved.
+////
 //
-//  UserScoreViewController.h
-//  SangYuQing
+//#import <UIKit/UIKit.h>
 //
-//  Created by mac on 2018/1/8.
-//  Copyright © 2018年 mac. All rights reserved.
+//@interface UserScoreViewController : UIViewController
 //
-
-#import <UIKit/UIKit.h>
-
-@interface UserScoreViewController : UIViewController
-
-@end
+//@end
+//

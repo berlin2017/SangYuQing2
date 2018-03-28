@@ -12,4 +12,5 @@
 
 @property(nonatomic,assign)NSInteger jifen;
 @property(nonatomic,assign)NSInteger money;
+@property(nonatomic,copy)NSString *apple_id;
 @end

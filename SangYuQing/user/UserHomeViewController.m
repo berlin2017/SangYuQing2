@@ -18,6 +18,9 @@
 #import "UserModel.h"
 #import "UserManager.h"
 #import "MyLikeViewController.h"
+#import "ScoreWebViewController.h"
+#import "UserScoreDetailViewController.h"
+#import "ScoreViewController2.h"
 
 
 @interface UserHomeViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -25,6 +28,7 @@
 @property (nonatomic,strong) UIImageView *scaleImageView; // 顶部图片
 @property(nonatomic,strong) UITableView *tableview;
 @property (nonatomic,strong) UserModel *user;
+@property(nonatomic,assign)NSInteger showScore;
 @end
 
 @implementation UserHomeViewController
@@ -56,17 +60,55 @@
     [_tableview registerClass:[UITableViewCell class] forCellReuseIdentifier:@"user_cell"];
     [_tableview registerNib:[UINib nibWithNibName:@"UserHeaderTableViewCell" bundle:nil] forCellReuseIdentifier:@"user_header"];
     [self.view addSubview:self.navigationView];
+    [self requestScore];
+}
+
+-(void)requestScore{
+    [HZLoadingHUD showHUDInView:self.view];
+    HZHttpClient *client = [HZHttpClient httpClient];
+    [client hcPOST:@"v1/ucenter/jfshow" parameters:nil success:^(NSURLSessionDataTask *task, id object) {
+        if ([object[@"state_code"] integerValue] == 0000) {
+            _showScore = [object[@"data"][@"is_show"] integerValue];
+            _showScore=1;
+            [_tableview.mj_header endRefreshing];
+            [_tableview reloadData];
+        }
+        [HZLoadingHUD hideHUDInView:self.view];
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        [HZLoadingHUD hideHUDInView:self.view];
+    }];
 }
 
 -(void)headRefresh{
-    _user = [UserManager ahnUser];
-    [_tableview reloadData];
-    [_tableview.mj_header endRefreshing];
+    [self requestScore];
+    //    _user = [UserManager ahnUser];
+    //    [_tableview reloadData];
+    //    [_tableview.mj_header endRefreshing];
 }
 
 -(void)updateUserModel{
     _user = [UserManager ahnUser];
-    [_tableview reloadData];
+    if(!_user){
+        [_tableview reloadData];
+        return;
+    }
+    [self requestScore];
+    
+    [HZLoadingHUD showHUDInView:self.view];
+    HZHttpClient *client = [HZHttpClient httpClient];
+    [client hcGET:@"v1/login/userinfo" parameters:@{@"user_id":[NSString stringWithFormat:@"%zd",_user.user_id]} success:^(NSURLSessionDataTask *task, id object) {
+        if ([object[@"state_code"] integerValue] == 0000) {
+            _user = [MTLJSONAdapter modelOfClass:[UserModel class] fromJSONDictionary:object[@"data"] error:nil];
+            [UserManager saveAhnUser:_user];
+            [_tableview reloadData];
+        }else{
+            [self.view makeCenterOffsetToast:object[@"msg"]];
+        }
+        [HZLoadingHUD hideHUDInView:self.view];
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        [self.view makeCenterOffsetToast:@"请求失败,请重试"];
+        [HZLoadingHUD hideHUDInView:self.view];
+    }];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -107,19 +149,19 @@
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    if (_user==nil||[_user.account_name isEqualToString: @"zou13965"]) {
+    if (_showScore == 0) {
         return 3;
     }
     return 4;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (_user==nil||[_user.account_name isEqualToString: @"zou13965"]) {
+    if (_showScore == 0) {
         if (section==1) {
             return 2;
         }
     }else{
-        if (section == 2) {
+        if (section == 2||section == 1) {
             return 2;
         }
     }
@@ -140,7 +182,7 @@
     cell.backgroundColor = [UIColor colorWithHexString:@"DFDFDF"];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
-    if (_user==nil||[_user.account_name isEqualToString: @"zou13965"]) {
+    if (_showScore == 0) {
         switch (indexPath.section) {
                 //            case 1:
                 //                cell.imageView.image = [UIImage imageNamed:@"user_jifen"];
@@ -173,13 +215,20 @@
     }else{
         switch (indexPath.section) {
             case 1:
-                cell.imageView.image = [UIImage imageNamed:@"user_jifen"];
-                cell.textLabel.text = @"我的积分";
-                if (_user&&_user.bonus_point) {
-                    cell.detailTextLabel.text = [NSString stringWithFormat:@"%zd",_user.bonus_point];
+                if (indexPath.row) {
+                    cell.imageView.image = [UIImage imageNamed:@"user_jifen"];
+                    cell.textLabel.text = @"积分记录";
+                    
                 }else{
-                    cell.detailTextLabel.text = @"0";
+                    cell.imageView.image = [UIImage imageNamed:@"user_jifen"];
+                    cell.textLabel.text = @"我的积分";
+                    if (_user&&_user.bonus_point) {
+                        cell.detailTextLabel.text = [NSString stringWithFormat:@"%zd",_user.bonus_point];
+                    }else{
+                        cell.detailTextLabel.text = @"0";
+                    }
                 }
+                
                 
                 break;
             case 2:
@@ -226,7 +275,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (_user==nil||[_user.account_name isEqualToString: @"zou13965"]) {
+    if (_showScore == 0) {
         switch (indexPath.section) {
             case 0:{
                 if (_user) {
@@ -320,16 +369,26 @@
                 break;
             }
             case 1:{
-                if (_user) {
-                    UserScoreViewController *controller = [[UserScoreViewController alloc]init];
-                    controller.hidesBottomBarWhenPushed = YES;
-                    [self.navigationController pushViewController:controller animated:YES];
-                }else{
+                if (!_user){
                     [self.view makeCenterOffsetToast:@"请先登录"];
                     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"user" bundle:nil];
                     UserLoginViewController * viewController = [sb instantiateViewControllerWithIdentifier:@"user_login"];
                     [viewController setHidesBottomBarWhenPushed:YES];
                     [self.navigationController pushViewController:viewController animated:YES];
+                    return;
+                }
+                
+                if (indexPath.row) {
+                        UserScoreDetailViewController *controller = [[UserScoreDetailViewController alloc]init];
+                        
+                        controller.hidesBottomBarWhenPushed = YES;
+                        [self.navigationController pushViewController:controller animated:YES];
+                 
+                }else{
+//                    [self.view makeToast:@"暂不支持内购,请前往pc端查看和充值"];
+                    ScoreViewController2 *controller = [[ScoreViewController2 alloc]init];
+                    controller.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:controller animated:YES];
                 }
                 
                 break;

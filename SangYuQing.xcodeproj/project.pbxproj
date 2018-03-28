@@ -27,7 +27,6 @@
 		041E161F200CDC2300B9FFA1 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E1614200CDC2300B9FFA1 /* BaseViewController.m */; };
 		041E1621200CDC2300B9FFA1 /* HZBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E161C200CDC2300B9FFA1 /* HZBannerView.m */; };
 		041E1658200CDC2800B9FFA1 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E1623200CDC2800B9FFA1 /* TestViewController.m */; };
-		041E1659200CDC2800B9FFA1 /* APOrderInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E1624200CDC2800B9FFA1 /* APOrderInfo.m */; };
 		041E165A200CDC2800B9FFA1 /* MyLikeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E1626200CDC2800B9FFA1 /* MyLikeViewController.m */; };
 		041E165B200CDC2800B9FFA1 /* UserScoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E162B200CDC2800B9FFA1 /* UserScoreViewController.m */; };
 		041E165C200CDC2800B9FFA1 /* UserScoreDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E162D200CDC2800B9FFA1 /* UserScoreDetailViewController.m */; };
@@ -172,9 +171,8 @@
 		041E17E3200CDD7C00B9FFA1 /* City.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E17DC200CDD7C00B9FFA1 /* City.m */; };
 		041E17E4200CDD7C00B9FFA1 /* Province.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E17E0200CDD7C00B9FFA1 /* Province.m */; };
 		041E17E5200CDD7C00B9FFA1 /* AddressPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E17E1200CDD7C00B9FFA1 /* AddressPickerView.m */; };
-		042177CD2023FCB700AA56A8 /* PayWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 042177CC2023FCB700AA56A8 /* PayWebViewController.m */; };
+		042177CD2023FCB700AA56A8 /* ScoreWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 042177CC2023FCB700AA56A8 /* ScoreWebViewController.m */; };
 		044ADF63200DB50B006D8B19 /* JiFenModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 044ADF62200DB50B006D8B19 /* JiFenModel.m */; };
-		044ADF66200DB919006D8B19 /* OrderInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 044ADF65200DB919006D8B19 /* OrderInfo.m */; };
 		044ADF69200DC358006D8B19 /* JiFenDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 044ADF68200DC358006D8B19 /* JiFenDetailModel.m */; };
 		044ADF70200DD0F4006D8B19 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 044ADF6F200DD0F4006D8B19 /* libc++.tbd */; };
 		044ADF72200DD0FD006D8B19 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 044ADF71200DD0FD006D8B19 /* libz.tbd */; };
@@ -214,6 +212,8 @@
 		047A67AB200F5E4E002558A9 /* OtherMoneyCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 047A67A9200F5E4E002558A9 /* OtherMoneyCollectionViewCell.m */; };
 		047A67AC200F5E4E002558A9 /* OtherMoneyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047A67AA200F5E4E002558A9 /* OtherMoneyCollectionViewCell.xib */; };
 		049A4ECA2020333400430080 /* JPXModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 049A4EC92020333400430080 /* JPXModel.m */; };
+		04EEB076206B7111003579C8 /* ScoreViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EEB075206B7111003579C8 /* ScoreViewController2.m */; };
+		04EEB078206B7C4E003579C8 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04EEB077206B7C4E003579C8 /* StoreKit.framework */; };
 		4A6680EF8DA2818A13A1C619 /* libPods-SangYuQing.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A241AB87E9863BCA2919E602 /* libPods-SangYuQing.a */; };
 /* End PBXBuildFile section */
 
@@ -273,7 +273,6 @@
 		041E161C200CDC2300B9FFA1 /* HZBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HZBannerView.m; sourceTree = "<group>"; };
 		041E161D200CDC2300B9FFA1 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		041E1623200CDC2800B9FFA1 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
-		041E1624200CDC2800B9FFA1 /* APOrderInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APOrderInfo.m; sourceTree = "<group>"; };
 		041E1625200CDC2800B9FFA1 /* UserHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserHomeViewController.h; sourceTree = "<group>"; };
 		041E1626200CDC2800B9FFA1 /* MyLikeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLikeViewController.m; sourceTree = "<group>"; };
 		041E1627200CDC2800B9FFA1 /* UserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoViewController.h; sourceTree = "<group>"; };
@@ -286,7 +285,6 @@
 		041E162E200CDC2800B9FFA1 /* UserFrogetPassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserFrogetPassViewController.m; sourceTree = "<group>"; };
 		041E162F200CDC2800B9FFA1 /* UserRuleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserRuleViewController.h; sourceTree = "<group>"; };
 		041E1630200CDC2800B9FFA1 /* UserHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserHomeViewController.m; sourceTree = "<group>"; };
-		041E1631200CDC2800B9FFA1 /* APOrderInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APOrderInfo.h; sourceTree = "<group>"; };
 		041E1632200CDC2800B9FFA1 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
 		041E1633200CDC2800B9FFA1 /* UserLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLoginViewController.m; sourceTree = "<group>"; };
 		041E1635200CDC2800B9FFA1 /* UserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserManager.m; sourceTree = "<group>"; };
@@ -539,12 +537,10 @@
 		041E17DF200CDD7C00B9FFA1 /* City.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = City.h; sourceTree = "<group>"; };
 		041E17E0200CDD7C00B9FFA1 /* Province.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Province.m; sourceTree = "<group>"; };
 		041E17E1200CDD7C00B9FFA1 /* AddressPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressPickerView.m; sourceTree = "<group>"; };
-		042177CB2023FCB700AA56A8 /* PayWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PayWebViewController.h; sourceTree = "<group>"; };
-		042177CC2023FCB700AA56A8 /* PayWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PayWebViewController.m; sourceTree = "<group>"; };
+		042177CB2023FCB700AA56A8 /* ScoreWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScoreWebViewController.h; sourceTree = "<group>"; };
+		042177CC2023FCB700AA56A8 /* ScoreWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScoreWebViewController.m; sourceTree = "<group>"; };
 		044ADF61200DB50B006D8B19 /* JiFenModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JiFenModel.h; sourceTree = "<group>"; };
 		044ADF62200DB50B006D8B19 /* JiFenModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JiFenModel.m; sourceTree = "<group>"; };
-		044ADF64200DB919006D8B19 /* OrderInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderInfo.h; sourceTree = "<group>"; };
-		044ADF65200DB919006D8B19 /* OrderInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderInfo.m; sourceTree = "<group>"; };
 		044ADF67200DC358006D8B19 /* JiFenDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JiFenDetailModel.h; sourceTree = "<group>"; };
 		044ADF68200DC358006D8B19 /* JiFenDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JiFenDetailModel.m; sourceTree = "<group>"; };
 		044ADF6F200DD0F4006D8B19 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
@@ -608,6 +604,9 @@
 		049A4EBD201FF68300430080 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		049A4EC82020333400430080 /* JPXModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JPXModel.h; sourceTree = "<group>"; };
 		049A4EC92020333400430080 /* JPXModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JPXModel.m; sourceTree = "<group>"; };
+		04EEB074206B7111003579C8 /* ScoreViewController2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScoreViewController2.h; sourceTree = "<group>"; };
+		04EEB075206B7111003579C8 /* ScoreViewController2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScoreViewController2.m; sourceTree = "<group>"; };
+		04EEB077206B7C4E003579C8 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		1BDD54C333966E32228BB2C9 /* Pods-SangYuQing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SangYuQing.release.xcconfig"; path = "Pods/Target Support Files/Pods-SangYuQing/Pods-SangYuQing.release.xcconfig"; sourceTree = "<group>"; };
 		3997F7E8378DC0BC4F3D699A /* Pods-SangYuQing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SangYuQing.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SangYuQing/Pods-SangYuQing.debug.xcconfig"; sourceTree = "<group>"; };
 		A241AB87E9863BCA2919E602 /* libPods-SangYuQing.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SangYuQing.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -618,6 +617,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04EEB078206B7C4E003579C8 /* StoreKit.framework in Frameworks */,
 				044ADF84200DD146006D8B19 /* CoreMotion.framework in Frameworks */,
 				044ADF82200DD13D006D8B19 /* CFNetwork.framework in Frameworks */,
 				044ADF80200DD136006D8B19 /* Foundation.framework in Frameworks */,
@@ -793,8 +793,6 @@
 		041E1622200CDC2800B9FFA1 /* user */ = {
 			isa = PBXGroup;
 			children = (
-				041E1631200CDC2800B9FFA1 /* APOrderInfo.h */,
-				041E1624200CDC2800B9FFA1 /* APOrderInfo.m */,
 				041E1634200CDC2800B9FFA1 /* model */,
 				041E1651200CDC2800B9FFA1 /* MyLikeViewController.h */,
 				041E1626200CDC2800B9FFA1 /* MyLikeViewController.m */,
@@ -821,8 +819,10 @@
 				041E162C200CDC2800B9FFA1 /* UserSettingsViewController.h */,
 				041E1657200CDC2800B9FFA1 /* UserSettingsViewController.m */,
 				041E163C200CDC2800B9FFA1 /* view */,
-				042177CB2023FCB700AA56A8 /* PayWebViewController.h */,
-				042177CC2023FCB700AA56A8 /* PayWebViewController.m */,
+				042177CB2023FCB700AA56A8 /* ScoreWebViewController.h */,
+				042177CC2023FCB700AA56A8 /* ScoreWebViewController.m */,
+				04EEB074206B7111003579C8 /* ScoreViewController2.h */,
+				04EEB075206B7111003579C8 /* ScoreViewController2.m */,
 			);
 			path = user;
 			sourceTree = "<group>";
@@ -836,8 +836,6 @@
 				041E163A200CDC2800B9FFA1 /* UserModel.h */,
 				044ADF61200DB50B006D8B19 /* JiFenModel.h */,
 				044ADF62200DB50B006D8B19 /* JiFenModel.m */,
-				044ADF64200DB919006D8B19 /* OrderInfo.h */,
-				044ADF65200DB919006D8B19 /* OrderInfo.m */,
 				044ADF67200DC358006D8B19 /* JiFenDetailModel.h */,
 				044ADF68200DC358006D8B19 /* JiFenDetailModel.m */,
 				04734F812010335800B9156A /* CityModel.h */,
@@ -1294,6 +1292,7 @@
 		DBAB2787486B94130DA01268 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				04EEB077206B7C4E003579C8 /* StoreKit.framework */,
 				044ADF83200DD146006D8B19 /* CoreMotion.framework */,
 				044ADF81200DD13D006D8B19 /* CFNetwork.framework */,
 				044ADF7F200DD136006D8B19 /* Foundation.framework */,
@@ -1620,7 +1619,7 @@
 				041E15D3200CDAA400B9FFA1 /* main.m in Sources */,
 				041E174D200CDC3700B9FFA1 /* MuDIModel.m in Sources */,
 				041E16F8200CDC3200B9FFA1 /* JiWenMoreViewController.m in Sources */,
-				042177CD2023FCB700AA56A8 /* PayWebViewController.m in Sources */,
+				042177CD2023FCB700AA56A8 /* ScoreWebViewController.m in Sources */,
 				041E1674200CDC2800B9FFA1 /* UserSettingsViewController.m in Sources */,
 				041E17B4200CDC3E00B9FFA1 /* UIView+Helper.m in Sources */,
 				041E171C200CDC3200B9FFA1 /* GiftCollectionViewCell.m in Sources */,
@@ -1668,15 +1667,14 @@
 				041E1701200CDC3200B9FFA1 /* LiuYanModel.m in Sources */,
 				041E1671200CDC2800B9FFA1 /* UserInfoViewController.m in Sources */,
 				041E16F7200CDC3200B9FFA1 /* ShangXiangViewController.m in Sources */,
+				04EEB076206B7111003579C8 /* ScoreViewController2.m in Sources */,
 				041E17BE200CDC3E00B9FFA1 /* HZThemeManager.m in Sources */,
 				041E170A200CDC3200B9FFA1 /* ZhuiSiHeaderTableViewCell.m in Sources */,
 				041E1708200CDC3200B9FFA1 /* GiftModel.m in Sources */,
 				041E1726200CDC3200B9FFA1 /* PrivateTopTableViewCell.m in Sources */,
 				041E17A7200CDC3E00B9FFA1 /* UIWebView+Helper.m in Sources */,
 				041E1704200CDC3200B9FFA1 /* ArticleModel.m in Sources */,
-				044ADF66200DB919006D8B19 /* OrderInfo.m in Sources */,
 				041E16F6200CDC3200B9FFA1 /* DetailTabBarViewController.m in Sources */,
-				041E1659200CDC2800B9FFA1 /* APOrderInfo.m in Sources */,
 				047A679B200EECFB002558A9 /* MyGuanZhuTableViewCell.m in Sources */,
 				041E17A4200CDC3E00B9FFA1 /* NSDate+Helper.m in Sources */,
 				049A4ECA2020333400430080 /* JPXModel.m in Sources */,
