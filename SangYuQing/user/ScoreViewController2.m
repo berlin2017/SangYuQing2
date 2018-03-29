@@ -19,6 +19,7 @@
 #import "JiFenModel.h"
 #import "HZWebBaseViewController.h"
 #import <StoreKit/StoreKit.h>
+#import<CommonCrypto/CommonDigest.h>
 
 @interface ScoreViewController2 ()<UICollectionViewDelegate,UICollectionViewDataSource,UITextFieldDelegate,SKPaymentTransactionObserver,SKProductsRequestDelegate>
 @property(nonatomic,strong) UIView *navigationView;       // 导航栏
@@ -511,16 +512,17 @@
      [HZLoadingHUD showHUDInView:self.view];
     JiFenModel *model = _list[_lastIndexPath.row];
     SKPayment *payment = [SKPayment paymentWithProductIdentifier:model.apple_id];
+     [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
     [[SKPaymentQueue defaultQueue] addPayment:payment];
 }
 
 -(void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray<SKPaymentTransaction *> *)transactions{
     NSLog(@"-----paymentQueue--------");
-    
     for (SKPaymentTransaction *transaction in transactions) {
         switch (transaction.transactionState) {
             case SKPaymentTransactionStatePurchased:{
                 //交易完成 [self  completeTransaction:transaction];
+            [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
                [HZLoadingHUD hideHUDInView:self.view];
                 NSLog(@"-----交易完成 --------");
                 [self addJifen];
@@ -529,6 +531,7 @@
             case SKPaymentTransactionStateFailed://交易失败
                 
             {
+                  [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
                  [HZLoadingHUD hideHUDInView:self.view];
                 NSLog(@"失败");
                 if (transaction.error.code != SKErrorPaymentCancelled) { }
@@ -539,6 +542,7 @@
             }break;
                 
             case SKPaymentTransactionStateRestored://已经购买过该商品 [self restoreTransaction:transaction];
+                  [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
                 NSLog(@"-----已经购买过该商品 --------");
             case SKPaymentTransactionStatePurchasing:
                 //商品添加进列表
@@ -550,17 +554,51 @@
     }
 }
 
+- (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue {
+   
+}
+
+- (NSString *) md5:(NSString *) input {
+    
+    const char *cStr = [input UTF8String];
+    
+    unsigned char digest[CC_MD5_DIGEST_LENGTH];
+    
+    CC_MD5( cStr, strlen(cStr), digest ); // This is the md5 call
+    
+    
+    
+    NSMutableString *output = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
+    
+    
+    
+    for(int i = 0; i < CC_MD5_DIGEST_LENGTH; i++)
+        
+        [output appendFormat:@"%02x", digest[i]];
+    
+    
+    
+    return  output;
+    
+}
+
+
+
+
 
 -(void)addJifen{
+   
     [HZLoadingHUD showHUDInView:self.view];
     HZHttpClient *client = [HZHttpClient httpClient];
     JiFenModel *model = _list[_lastIndexPath.row];
-    [client hcPOST:@"/v1/jifen/gopay" parameters:@{@"money":[NSString stringWithFormat:@"%zd",model.jifen],@"uid":[NSString stringWithFormat:@"%zd",[UserManager ahnUser].user_id]} success:^(NSURLSessionDataTask *task, id object) {
+     NSString *sign = [self md5:[NSString stringWithFormat:@"num=%zdsecret=%@uid=%zd",model.jifen,@"sSangyYuqQing",[UserManager ahnUser].user_id]];
+    [client hcPOST:@"/v1/jifen/pay" parameters:@{@"num":[NSString stringWithFormat:@"%zd",model.jifen],@"uid":[NSString stringWithFormat:@"%zd",[UserManager ahnUser].user_id],@"sign":sign} success:^(NSURLSessionDataTask *task, id object) {
         //         [client hcPOST:@"/v1/jifen/gopay" parameters:@{@"money":@"0.01",@"pay_type":type,@"app_type":@"ios"} success:^(NSURLSessionDataTask *task, id object) {
         if ([object[@"state_code"] isEqualToString:@"0000"]) {
             
             UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"" message:@"购买成功" delegate:nil cancelButtonTitle:NSLocalizedString(@"关闭",nil) otherButtonTitles:nil];
             [alerView show];
+            [self getJiFen];
             
         }else  if ([object[@"state_code"] isEqualToString:@"9999"]){
             [self.view makeCenterOffsetToast:@"登录信息已过期，请重新登录"];
@@ -616,13 +654,13 @@
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
-    [self.navigationController setNavigationBarHidden:NO];
+//    [self.navigationController setNavigationBarHidden:NO];
      // 移除观察者
       [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
-    [self.navigationController setNavigationBarHidden:YES];
+//    [self.navigationController setNavigationBarHidden:YES];
     [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
 }
 

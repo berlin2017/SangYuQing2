@@ -38,7 +38,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>201803231130</string>
+	<string>201803291600</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -47,11 +47,11 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>桑榆晴请求使用你的相机信息</string>
+	<string>桑榆晴需要使用相机来设置你的头像或逝者照片是否允许打开相机？</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>保存照片</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>桑榆晴请求使用你的相册信息</string>
+	<string>桑榆晴需要使用相册来设置你的头像或逝者照片是否允许打开相册？</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

@@ -28,7 +28,7 @@
 @property (nonatomic,strong) UIImageView *scaleImageView; // 顶部图片
 @property(nonatomic,strong) UITableView *tableview;
 @property (nonatomic,strong) UserModel *user;
-@property(nonatomic,assign)NSInteger showScore;
+//@property(nonatomic,assign)NSInteger showScore;
 @end
 
 @implementation UserHomeViewController
@@ -60,30 +60,30 @@
     [_tableview registerClass:[UITableViewCell class] forCellReuseIdentifier:@"user_cell"];
     [_tableview registerNib:[UINib nibWithNibName:@"UserHeaderTableViewCell" bundle:nil] forCellReuseIdentifier:@"user_header"];
     [self.view addSubview:self.navigationView];
-    [self requestScore];
+    //    [self requestScore];
 }
 
--(void)requestScore{
-    [HZLoadingHUD showHUDInView:self.view];
-    HZHttpClient *client = [HZHttpClient httpClient];
-    [client hcPOST:@"v1/ucenter/jfshow" parameters:nil success:^(NSURLSessionDataTask *task, id object) {
-        if ([object[@"state_code"] integerValue] == 0000) {
-            _showScore = [object[@"data"][@"is_show"] integerValue];
-            _showScore=1;
-            [_tableview.mj_header endRefreshing];
-            [_tableview reloadData];
-        }
-        [HZLoadingHUD hideHUDInView:self.view];
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        [HZLoadingHUD hideHUDInView:self.view];
-    }];
-}
+//-(void)requestScore{
+//    [HZLoadingHUD showHUDInView:self.view];
+//    HZHttpClient *client = [HZHttpClient httpClient];
+//    [client hcPOST:@"v1/ucenter/jfshow" parameters:nil success:^(NSURLSessionDataTask *task, id object) {
+//        if ([object[@"state_code"] integerValue] == 0000) {
+//            _showScore = [object[@"data"][@"is_show"] integerValue];
+//            _showScore=1;
+//            [_tableview.mj_header endRefreshing];
+//            [_tableview reloadData];
+//        }
+//        [HZLoadingHUD hideHUDInView:self.view];
+//    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+//        [HZLoadingHUD hideHUDInView:self.view];
+//    }];
+//}
 
 -(void)headRefresh{
-    [self requestScore];
-    //    _user = [UserManager ahnUser];
-    //    [_tableview reloadData];
-    //    [_tableview.mj_header endRefreshing];
+    //    [self requestScore];
+    _user = [UserManager ahnUser];
+    [_tableview reloadData];
+    [_tableview.mj_header endRefreshing];
 }
 
 -(void)updateUserModel{
@@ -92,7 +92,7 @@
         [_tableview reloadData];
         return;
     }
-    [self requestScore];
+    //    [self requestScore];
     
     [HZLoadingHUD showHUDInView:self.view];
     HZHttpClient *client = [HZHttpClient httpClient];
@@ -149,21 +149,14 @@
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    if (_showScore == 0) {
-        return 3;
-    }
+    
     return 4;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (_showScore == 0) {
-        if (section==1) {
-            return 2;
-        }
-    }else{
-        if (section == 2||section == 1) {
-            return 2;
-        }
+    
+    if (section == 2) {
+        return 2;
     }
     return 1;
 }
@@ -182,74 +175,37 @@
     cell.backgroundColor = [UIColor colorWithHexString:@"DFDFDF"];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
-    if (_showScore == 0) {
-        switch (indexPath.section) {
-                //            case 1:
-                //                cell.imageView.image = [UIImage imageNamed:@"user_jifen"];
-                //                cell.textLabel.text = @"我的积分";
-                //                if (_user&&_user.bonus_point) {
-                //                    cell.detailTextLabel.text = [NSString stringWithFormat:@"%zd",_user.bonus_point];
-                //                }else{
-                //                    cell.detailTextLabel.text = @"0";
-                //                }
-                //
-                //                break;
-            case 1:
-                if(indexPath.row){
-                    cell.imageView.image = [UIImage imageNamed:@"user_like"];
-                    cell.textLabel.text = @"我的关注";
-                }else{
-                    cell.imageView.image = [UIImage imageNamed:@"user_siren"];
-                    cell.textLabel.text = @"私人墓园";
-                }
-                break;
-            case 2:
-                cell.imageView.image = [UIImage imageNamed:@"user_settings"];
-                cell.textLabel.text = @"设置";
-                break;
-                
-            default:
-                break;
-        }
-        return cell;
-    }else{
-        switch (indexPath.section) {
-            case 1:
-                if (indexPath.row) {
-                    cell.imageView.image = [UIImage imageNamed:@"user_jifen"];
-                    cell.textLabel.text = @"积分记录";
-                    
-                }else{
-                    cell.imageView.image = [UIImage imageNamed:@"user_jifen"];
-                    cell.textLabel.text = @"我的积分";
-                    if (_user&&_user.bonus_point) {
-                        cell.detailTextLabel.text = [NSString stringWithFormat:@"%zd",_user.bonus_point];
-                    }else{
-                        cell.detailTextLabel.text = @"0";
-                    }
-                }
-                
-                
-                break;
-            case 2:
-                if(indexPath.row){
-                    cell.imageView.image = [UIImage imageNamed:@"user_like"];
-                    cell.textLabel.text = @"我的关注";
-                }else{
-                    cell.imageView.image = [UIImage imageNamed:@"user_siren"];
-                    cell.textLabel.text = @"私人墓园";
-                }
-                break;
-            case 3:
-                cell.imageView.image = [UIImage imageNamed:@"user_settings"];
-                cell.textLabel.text = @"设置";
-                break;
-                
-            default:
-                break;
-        }
-        return cell;
+    
+    switch (indexPath.section) {
+        case 1:
+            cell.imageView.image = [UIImage imageNamed:@"user_jifen"];
+            cell.textLabel.text = @"我的积分";
+            if (_user&&_user.bonus_point) {
+                cell.detailTextLabel.text = [NSString stringWithFormat:@"%zd",_user.bonus_point];
+            }else{
+                cell.detailTextLabel.text = @"0";
+            }
+            
+            
+            break;
+        case 2:
+            if(indexPath.row){
+                cell.imageView.image = [UIImage imageNamed:@"user_like"];
+                cell.textLabel.text = @"我的关注";
+            }else{
+                cell.imageView.image = [UIImage imageNamed:@"user_siren"];
+                cell.textLabel.text = @"私人墓园";
+            }
+            break;
+        case 3:
+            cell.imageView.image = [UIImage imageNamed:@"user_settings"];
+            cell.textLabel.text = @"设置";
+            break;
+            
+        default:
+            break;
     }
+    return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -275,164 +231,73 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (_showScore == 0) {
-        switch (indexPath.section) {
-            case 0:{
-                if (_user) {
-                    UserInfoViewController *controller = [[UserInfoViewController alloc]init];
-                    //             TestViewController *controller = [[TestViewController alloc]init];
-                    controller.hidesBottomBarWhenPushed = YES;
-                    [self.navigationController pushViewController:controller animated:YES];
-                }else{
-                    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"user" bundle:nil];
-                    UserLoginViewController * viewController = [sb instantiateViewControllerWithIdentifier:@"user_login"];
-                    [viewController setHidesBottomBarWhenPushed:YES];
-                    [self.navigationController pushViewController:viewController animated:YES];
-                }
-                
-                
-                break;
-            }
-                //            case 1:{
-                //                if (_user) {
-                //                    UserScoreViewController *controller = [[UserScoreViewController alloc]init];
-                //                    controller.hidesBottomBarWhenPushed = YES;
-                //                    [self.navigationController pushViewController:controller animated:YES];
-                //                }else{
-                //                    [self.view makeCenterOffsetToast:@"请先登录"];
-                //                    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"user" bundle:nil];
-                //                    UserLoginViewController * viewController = [sb instantiateViewControllerWithIdentifier:@"user_login"];
-                //                    [viewController setHidesBottomBarWhenPushed:YES];
-                //                    [self.navigationController pushViewController:viewController animated:YES];
-                //                }
-                //
-                //                break;
-                //            }
-            case 1:{
-                if (!_user) {
-                    [self.view makeCenterOffsetToast:@"请先登录"];
-                    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"user" bundle:nil];
-                    UserLoginViewController * viewController = [sb instantiateViewControllerWithIdentifier:@"user_login"];
-                    [viewController setHidesBottomBarWhenPushed:YES];
-                    [self.navigationController pushViewController:viewController animated:YES];
-                    return;
-                }
-                if(indexPath.row){
-                    
-                    MyLikeViewController *controller = [[MyLikeViewController alloc]init];
-                    controller.hidesBottomBarWhenPushed = YES;
-                    [self.navigationController pushViewController:controller animated:YES];
-                    
-                }else{
-                    PrivateMoreViewController *controller = [[PrivateMoreViewController alloc]init];
-                    controller.hidesBottomBarWhenPushed = YES;
-                    [self.navigationController pushViewController:controller animated:YES];
-                }
-                break;
-            }
-            case 2:{
-                //            if (!_user) {
-                //                [self.view makeCenterOffsetToast:@"请先登录"];
-                //                UIStoryboard *sb = [UIStoryboard storyboardWithName:@"user" bundle:nil];
-                //                UserLoginViewController * viewController = [sb instantiateViewControllerWithIdentifier:@"user_login"];
-                //                [viewController setHidesBottomBarWhenPushed:YES];
-                //                [self.navigationController pushViewController:viewController animated:YES];
-                //                return;
-                //            }
-                UserSettingsViewController *controller = [[UserSettingsViewController alloc]init];
+    
+    switch (indexPath.section) {
+        case 0:{
+            if (_user) {
+                UserInfoViewController *controller = [[UserInfoViewController alloc]init];
+                //             TestViewController *controller = [[TestViewController alloc]init];
                 controller.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:controller animated:YES];
-                break;
+            }else{
+                UIStoryboard *sb = [UIStoryboard storyboardWithName:@"user" bundle:nil];
+                UserLoginViewController * viewController = [sb instantiateViewControllerWithIdentifier:@"user_login"];
+                [viewController setHidesBottomBarWhenPushed:YES];
+                [self.navigationController pushViewController:viewController animated:YES];
             }
-            default:
-                break;
-                
+            
+            
+            break;
         }
-        
-        
-    }else{
-        switch (indexPath.section) {
-            case 0:{
-                if (_user) {
-                    UserInfoViewController *controller = [[UserInfoViewController alloc]init];
-                    //             TestViewController *controller = [[TestViewController alloc]init];
-                    controller.hidesBottomBarWhenPushed = YES;
-                    [self.navigationController pushViewController:controller animated:YES];
-                }else{
-                    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"user" bundle:nil];
-                    UserLoginViewController * viewController = [sb instantiateViewControllerWithIdentifier:@"user_login"];
-                    [viewController setHidesBottomBarWhenPushed:YES];
-                    [self.navigationController pushViewController:viewController animated:YES];
-                }
-                
-                
-                break;
+        case 1:{
+            if (!_user){
+                [self.view makeCenterOffsetToast:@"请先登录"];
+                UIStoryboard *sb = [UIStoryboard storyboardWithName:@"user" bundle:nil];
+                UserLoginViewController * viewController = [sb instantiateViewControllerWithIdentifier:@"user_login"];
+                [viewController setHidesBottomBarWhenPushed:YES];
+                [self.navigationController pushViewController:viewController animated:YES];
+                return;
             }
-            case 1:{
-                if (!_user){
-                    [self.view makeCenterOffsetToast:@"请先登录"];
-                    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"user" bundle:nil];
-                    UserLoginViewController * viewController = [sb instantiateViewControllerWithIdentifier:@"user_login"];
-                    [viewController setHidesBottomBarWhenPushed:YES];
-                    [self.navigationController pushViewController:viewController animated:YES];
-                    return;
-                }
-                
-                if (indexPath.row) {
-                        UserScoreDetailViewController *controller = [[UserScoreDetailViewController alloc]init];
-                        
-                        controller.hidesBottomBarWhenPushed = YES;
-                        [self.navigationController pushViewController:controller animated:YES];
-                 
-                }else{
-//                    [self.view makeToast:@"暂不支持内购,请前往pc端查看和充值"];
-                    ScoreViewController2 *controller = [[ScoreViewController2 alloc]init];
-                    controller.hidesBottomBarWhenPushed = YES;
-                    [self.navigationController pushViewController:controller animated:YES];
-                }
-                
-                break;
+            
+            ScoreViewController2 *controller = [[ScoreViewController2 alloc]init];
+            controller.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:controller animated:YES];
+            
+            
+            break;
+        }
+        case 2:{
+            if (!_user) {
+                [self.view makeCenterOffsetToast:@"请先登录"];
+                UIStoryboard *sb = [UIStoryboard storyboardWithName:@"user" bundle:nil];
+                UserLoginViewController * viewController = [sb instantiateViewControllerWithIdentifier:@"user_login"];
+                [viewController setHidesBottomBarWhenPushed:YES];
+                [self.navigationController pushViewController:viewController animated:YES];
+                return;
             }
-            case 2:{
-                if (!_user) {
-                    [self.view makeCenterOffsetToast:@"请先登录"];
-                    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"user" bundle:nil];
-                    UserLoginViewController * viewController = [sb instantiateViewControllerWithIdentifier:@"user_login"];
-                    [viewController setHidesBottomBarWhenPushed:YES];
-                    [self.navigationController pushViewController:viewController animated:YES];
-                    return;
-                }
-                if(indexPath.row){
-                    
-                    MyLikeViewController *controller = [[MyLikeViewController alloc]init];
-                    controller.hidesBottomBarWhenPushed = YES;
-                    [self.navigationController pushViewController:controller animated:YES];
-                    
-                }else{
-                    PrivateMoreViewController *controller = [[PrivateMoreViewController alloc]init];
-                    controller.hidesBottomBarWhenPushed = YES;
-                    [self.navigationController pushViewController:controller animated:YES];
-                }
-                break;
-            }
-            case 3:{
-                //            if (!_user) {
-                //                [self.view makeCenterOffsetToast:@"请先登录"];
-                //                UIStoryboard *sb = [UIStoryboard storyboardWithName:@"user" bundle:nil];
-                //                UserLoginViewController * viewController = [sb instantiateViewControllerWithIdentifier:@"user_login"];
-                //                [viewController setHidesBottomBarWhenPushed:YES];
-                //                [self.navigationController pushViewController:viewController animated:YES];
-                //                return;
-                //            }
-                UserSettingsViewController *controller = [[UserSettingsViewController alloc]init];
+            if(indexPath.row){
+                
+                MyLikeViewController *controller = [[MyLikeViewController alloc]init];
                 controller.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:controller animated:YES];
-                break;
+                
+            }else{
+                PrivateMoreViewController *controller = [[PrivateMoreViewController alloc]init];
+                controller.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:controller animated:YES];
             }
-            default:
-                break;
+            break;
         }
+        case 3:{
+            UserSettingsViewController *controller = [[UserSettingsViewController alloc]init];
+            controller.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:controller animated:YES];
+            break;
+        }
+        default:
+            break;
     }
+    
 }
 
 @end
