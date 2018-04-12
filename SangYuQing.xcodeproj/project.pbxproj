@@ -1380,6 +1380,11 @@
 					041E15BF200CDAA400B9FFA1 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+						};
 					};
 					041E15D7200CDAA400B9FFA1 = {
 						CreatedOnToolsVersion = 9.2;

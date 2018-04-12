@@ -509,10 +509,10 @@
     //    }else{
     //        [self getOrderInfo:@"ali"];
     //    }
-     [HZLoadingHUD showHUDInView:self.view];
+    [HZLoadingHUD showHUDInView:self.view];
     JiFenModel *model = _list[_lastIndexPath.row];
     SKPayment *payment = [SKPayment paymentWithProductIdentifier:model.apple_id];
-     [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
+    [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
     [[SKPaymentQueue defaultQueue] addPayment:payment];
 }
 
@@ -522,17 +522,35 @@
         switch (transaction.transactionState) {
             case SKPaymentTransactionStatePurchased:{
                 //交易完成 [self  completeTransaction:transaction];
-            [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
-               [HZLoadingHUD hideHUDInView:self.view];
-                NSLog(@"-----交易完成 --------");
-                [self addJifen];
-             
+                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+                NSString * productIdentifier = transaction.payment.productIdentifier;
+                // NSLog(@"productIdentifier Product id：%@", productIdentifier);
+                NSString *transactionReceiptString= nil;
+                
+                //系统IOS7.0以上获取支付验证凭证的方式应该改变，切验证返回的数据结构也不一样了。
+                 NSString *version = [UIDevice currentDevice].systemVersion;
+                if([version intValue] >= 7.0){
+                    // 验证凭据，获取到苹果返回的交易凭据
+                    // appStoreReceiptURL iOS7.0增加的，购买交易完成后，会将凭据存放在该地址
+                    
+                    NSURL *receiptURL = [[NSBundle mainBundle] appStoreReceiptURL];
+                    NSData *receipt = [NSData dataWithContentsOfURL:receiptURL];
+                     transactionReceiptString = [receipt base64EncodedStringWithOptions:0];
+                }else{
+                     NSData * receiptData = transaction.transactionReceipt;
+                            //  transactionReceiptString = [receiptData base64EncodedString];
+                          transactionReceiptString = [receiptData base64EncodedStringWithOptions:0];
+                        }
+                   // 去验证是否真正的支付成功了
+                   [self checkAppStorePayResultWithBase64String:transactionReceiptString];
+                
+                
             } break;
             case SKPaymentTransactionStateFailed://交易失败
                 
             {
-                  [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
-                 [HZLoadingHUD hideHUDInView:self.view];
+                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+                [HZLoadingHUD hideHUDInView:self.view];
                 NSLog(@"失败");
                 if (transaction.error.code != SKErrorPaymentCancelled) { }
                 [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
@@ -542,7 +560,7 @@
             }break;
                 
             case SKPaymentTransactionStateRestored://已经购买过该商品 [self restoreTransaction:transaction];
-                  [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
                 NSLog(@"-----已经购买过该商品 --------");
             case SKPaymentTransactionStatePurchasing:
                 //商品添加进列表
@@ -554,8 +572,173 @@
     }
 }
 
+- (void)checkAppStorePayResultWithBase64String:(NSString *)base64String {
+    
+    NSError *error;
+    NSDictionary *requestContents = @{
+                                      @"receipt-data": base64String
+                                      };
+    NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestContents
+                                                          options:0
+                                                            error:&error];
+    if (!requestData) {
+        [HZLoadingHUD hideHUDInView:self.view];
+        UIAlertView *alerView2 = [[UIAlertView alloc] initWithTitle:@"提示" message:@"收据验证失败" delegate:nil cancelButtonTitle:NSLocalizedString(@"关闭",nil) otherButtonTitles:nil];
+        [alerView2 show];
+    }
+    
+    // Create a POST request with the receipt data.
+    NSURL *storeURL = [NSURL URLWithString:@"https://buy.itunes.apple.com/verifyReceipt"];
+    NSMutableURLRequest *storeRequest = [NSMutableURLRequest requestWithURL:storeURL];
+    [storeRequest setHTTPMethod:@"POST"];
+    [storeRequest setHTTPBody:requestData];
+    
+    // Make a connection to the iTunes Store on a background queue.
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    [NSURLConnection sendAsynchronousRequest:storeRequest queue:queue
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+                               if (connectionError) {
+                                   /* ... Handle error ... */
+                                   [HZLoadingHUD hideHUDInView:self.view];
+                                   UIAlertView *alerView2 = [[UIAlertView alloc] initWithTitle:@"提示" message:@"收据验证失败" delegate:nil cancelButtonTitle:NSLocalizedString(@"关闭",nil) otherButtonTitles:nil];
+                                   [alerView2 show];
+                               } else {
+                                   NSError *error;
+                                   NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+                                   if (!jsonResponse) {
+                                       [HZLoadingHUD hideHUDInView:self.view];
+                                       UIAlertView *alerView2 = [[UIAlertView alloc] initWithTitle:@"提示" message:@"收据验证失败" delegate:nil cancelButtonTitle:NSLocalizedString(@"关闭",nil) otherButtonTitles:nil];
+                                       [alerView2 show];
+                                       /* ... Handle error ...*/
+                                       
+                                   }
+                                   if ([jsonResponse[@"status"] longValue] == 21007) {
+                                       [self verifySanbox:base64String];
+                                       return ;
+                                   }
+                                   /* ... Send a response back to the device ... */
+                                   NSLog(@"-----交易完成 --------");
+                                   [self addJifen];
+                               }
+                           }];
+
+    
+}
+
+-(void)verifySanbox:(NSString *)base64String{
+    NSError *error;
+    NSDictionary *requestContents = @{
+                                      @"receipt-data": base64String
+                                      };
+    NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestContents
+                                                          options:0
+                                                            error:&error];
+    if (!requestData) {
+        [HZLoadingHUD hideHUDInView:self.view];
+        UIAlertView *alerView2 = [[UIAlertView alloc] initWithTitle:@"提示" message:@"收据验证失败" delegate:nil cancelButtonTitle:NSLocalizedString(@"关闭",nil) otherButtonTitles:nil];
+        [alerView2 show];
+    }
+    
+    NSURL *storeURL = [NSURL URLWithString:@"https://sandbox.itunes.apple.com/verifyReceipt"];
+    NSMutableURLRequest *storeRequest = [NSMutableURLRequest requestWithURL:storeURL];
+    [storeRequest setHTTPMethod:@"POST"];
+    [storeRequest setHTTPBody:requestData];
+    
+    // Make a connection to the iTunes Store on a background queue.
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    [NSURLConnection sendAsynchronousRequest:storeRequest queue:queue
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+                               if (connectionError) {
+                                   /* ... Handle error ... */
+                                   [HZLoadingHUD hideHUDInView:self.view];
+                                   UIAlertView *alerView2 = [[UIAlertView alloc] initWithTitle:@"提示" message:@"收据验证失败" delegate:nil cancelButtonTitle:NSLocalizedString(@"关闭",nil) otherButtonTitles:nil];
+                                   [alerView2 show];
+                               } else {
+                                   NSError *error;
+                                   NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+                                   if (!jsonResponse) {
+                                       [HZLoadingHUD hideHUDInView:self.view];
+                                       UIAlertView *alerView2 = [[UIAlertView alloc] initWithTitle:@"提示" message:@"收据验证失败" delegate:nil cancelButtonTitle:NSLocalizedString(@"关闭",nil) otherButtonTitles:nil];
+                                       [alerView2 show];
+                                       /* ... Handle error ...*/
+                                       
+                                   }
+                                   /* ... Send a response back to the device ... */
+                                   NSLog(@"-----交易完成 --------");
+                                   [self addJifen];
+                               }
+                           }];
+}
+
+#pragma mark 客户端验证购买凭据
+- (void)verifyTransactionResult
+{
+    // 验证凭据，获取到苹果返回的交易凭据
+    // appStoreReceiptURL iOS7.0增加的，购买交易完成后，会将凭据存放在该地址
+    NSURL *receiptURL = [[NSBundle mainBundle] appStoreReceiptURL];
+    // 从沙盒中获取到购买凭据
+    NSData *receipt = [NSData dataWithContentsOfURL:receiptURL];
+    // 传输的是BASE64编码的字符串
+    /**
+     BASE64 常用的编码方案，通常用于数据传输，以及加密算法的基础算法，传输过程中能够保证数据传输的稳定性
+     BASE64是可以编码和解码的
+     */
+    NSDictionary *requestContents = @{
+                                      @"receipt-data": [receipt base64EncodedStringWithOptions:0]
+                                      };
+    NSError *error;
+    // 转换为 JSON 格式
+    NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestContents
+                                                          options:0
+                                                            error:&error];
+    // 不存在
+    if (!requestData) { /* ... Handle error ... */ }
+    
+    // 发送网络POST请求，对购买凭据进行验证
+    NSString *verifyUrlString;
+#if (defined(APPSTORE_ASK_TO_BUY_IN_SANDBOX) && defined(DEBUG))
+    verifyUrlString = @"https://sandbox.itunes.apple.com/verifyReceipt";
+#else
+    verifyUrlString = @"https://buy.itunes.apple.com/verifyReceipt";
+#endif
+    // 国内访问苹果服务器比较慢，timeoutInterval 需要长一点
+    NSMutableURLRequest *storeRequest = [NSMutableURLRequest requestWithURL:[[NSURL alloc] initWithString:verifyUrlString] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10.0f];
+    
+    [storeRequest setHTTPMethod:@"POST"];
+    [storeRequest setHTTPBody:requestData];
+    
+    // 在后台对列中提交验证请求，并获得官方的验证JSON结果
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    [NSURLConnection sendAsynchronousRequest:storeRequest queue:queue
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+                               [HZLoadingHUD hideHUDInView:self.view];
+                               if (connectionError) {
+                                   NSLog(@"链接失败");
+                               } else {
+                                   NSError *error;
+                                   NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+                                   if (!jsonResponse) {
+                                       NSLog(@"验证失败");
+                                   }
+                                   
+                                   // 比对 jsonResponse 中以下信息基本上可以保证数据安全
+                                   /*
+                                    bundle_id
+                                    application_version
+                                    product_id
+                                    transaction_id
+                                    */
+                                   
+                                   NSLog(@"验证成功");
+                                   NSLog(@"-----交易完成 --------");
+                                   [self addJifen];
+                               }
+                           }];
+    
+}
+
 - (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue {
-   
+    
 }
 
 - (NSString *) md5:(NSString *) input {
@@ -587,11 +770,11 @@
 
 
 -(void)addJifen{
-   
+    
     [HZLoadingHUD showHUDInView:self.view];
     HZHttpClient *client = [HZHttpClient httpClient];
     JiFenModel *model = _list[_lastIndexPath.row];
-     NSString *sign = [self md5:[NSString stringWithFormat:@"num=%zdsecret=%@uid=%zd",model.jifen,@"sSangyYuqQing",[UserManager ahnUser].user_id]];
+    NSString *sign = [self md5:[NSString stringWithFormat:@"num=%zdsecret=%@uid=%zd",model.jifen,@"sSangyYuqQing",[UserManager ahnUser].user_id]];
     [client hcPOST:@"/v1/jifen/pay" parameters:@{@"num":[NSString stringWithFormat:@"%zd",model.jifen],@"uid":[NSString stringWithFormat:@"%zd",[UserManager ahnUser].user_id],@"sign":sign} success:^(NSURLSessionDataTask *task, id object) {
         //         [client hcPOST:@"/v1/jifen/gopay" parameters:@{@"money":@"0.01",@"pay_type":type,@"app_type":@"ios"} success:^(NSURLSessionDataTask *task, id object) {
         if ([object[@"state_code"] isEqualToString:@"0000"]) {
@@ -654,13 +837,13 @@
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
-//    [self.navigationController setNavigationBarHidden:NO];
+    //    [self.navigationController setNavigationBarHidden:NO];
      // 移除观察者
       [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
-//    [self.navigationController setNavigationBarHidden:YES];
+    //    [self.navigationController setNavigationBarHidden:YES];
     [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
 }
 
